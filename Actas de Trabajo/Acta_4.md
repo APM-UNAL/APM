@@ -14,7 +14,7 @@ Brian Camilo Valencia Peña
 2. Repartir  
 
 ### Conclusiones
-1. Juan David y Francisco adelantarán parte del EDT.  
+1. Juan David, Camilo y Francisco adelantarán parte del EDT.  
 2. Luis y Felipe sobre KPI's y herramientas de project managment.  
 
 ### Comentarios
