@@ -1,0 +1,2967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Statistics Report</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta charset="utf-8"/>
+<meta name="author" content="luis-"/>
+<meta name="description" content="statistics report"/>
+<meta name="keywords" content="statistics report,report,statistics,material flow"/>
+<style>
+body {
+font: 10pt 'Segoe UI', Helvetica, sans-serif;
+}
+a {
+text-decoration: none;
+cursor:          pointer;
+color:           #395998;
+}
+a:hover {
+text-decoration: underline;
+}
+h1, h2, h3, h4, h5, h6 {
+border:    1pt solid #2882A0;
+padding:   1pt 4pt 2pt;
+font-size: 11pt;
+}
+h1 {
+border-width: 2pt;
+padding:      0pt 0pt 0pt 4pt;
+font-size:    16pt;
+}
+h2 {
+border-left-width: 6pt;
+padding:           0pt 4pt 0pt;
+font-size:         14pt;
+}
+h3 {
+border-left-width: 6pt;
+padding:           1pt 4pt 0pt;
+font-size:         13pt;
+}
+h4 {
+font-size: 12pt;
+}
+figure {
+display:        inline-block;
+margin:         1em;
+vertical-align: text-top;
+}
+figure table {
+box-shadow: 10px 10px 6px -6px #777;
+}
+figcaption {
+padding-top: 0.25em;
+font-size:   11pt;
+text-align:  left;
+}
+table {
+border:          1px solid #464646;
+margin:          0;
+padding:         0;
+caption-side:    top;
+border-collapse: collapse;
+border-spacing:  0;
+empty-cells:     show;
+font-size:       10pt;
+text-align:      left;
+box-shadow:      10px 10px 6px -6px #777;
+}
+table caption {
+font-size:   120%;
+font-weight: bold;
+}
+table thead {
+border: 1px solid #464646;
+}
+table tbody {
+border: 1px solid #464646;
+}
+table tr {
+border: 1px solid #464646;
+}
+table tr:nth-child(even) {
+background-color:#F0F0F0;
+}
+table tr:hover {
+background-color: #FFF09B;
+}
+table th {
+background-color: #DCDCDC;
+color:            #1E1E1E;
+border:           1px solid #464646;
+}
+table th, table td {
+padding:        0.05em 0.2em;
+vertical-align: top;
+}
+table td {
+border:  1px solid #464646;
+}
+button, input[type="button"] {
+color:            #1E1E1E;
+background-color: #EBF0F5;
+border:           1px solid #AAAAAA;
+}
+button:focus, input[type="button"]:focus {
+outline:        1px solid #6E6E6E;
+outline-offset: -3px;
+}
+button:hover, input[type="button"]:hover {
+background-color: #DAECF0;
+}
+button:active, input[type="button"]:active {
+background-color: #AFD7E1;
+}
+table {
+display:         inline-block;
+}
+div {
+margin: 5px 5px;
+}
+table.Auswertungen {
+font-weight:    normal;
+text-align:     left;
+vertical-align: middle;
+}
+table.Auswertungen th, table.Auswertungen td {
+text-align:       right;
+vertical-align:   center;
+padding-left:     1px;
+padding-right:    1px;
+}
+table.Auswertungen th {
+background-color: #DCDCDC;
+}
+table.Auswertungen th.CIdx,
+table.Auswertungen th.RIdx,
+table.Auswertungen th.CFett {
+font-weight:      bold;
+}
+table.Auswertungen th.CIdx,
+table.Auswertungen th.CFett {
+text-align: center;
+}
+table.Auswertungen th.CFett {border-left-width: 1px;}
+table.Auswertungen th.RIdx  {text-align:        left;}
+table.Auswertungen td.NumP,
+table.Auswertungen td.NumPFett,
+table.Auswertungen td.NumN {
+text-align:  right;
+white-space: nowrap;
+}
+table.Auswertungen td.NumPFett {border-left-width: 1px;}
+table.Auswertungen td.NumN     {color:             #CD0000;}
+table.Auswertungen td.L        {text-align:        left;}
+table.Auswertungen td.C        {text-align:        center;}
+table.Auswertungen td.R        {text-align:        right;}
+
+@media only screen {}
+@media only print {@page {
+size:             landscape;
+}
+table  {
+orphans:          5;
+color:            #000000;
+font:             7pt Segoe, Calibri, Tahoma, Arial, sans-serif;
+background-color: #FFFFFF;
+margin:           0;
+padding:          0;
+page-break-after: avoid;
+}
+.donotprint {
+display: none;
+}
+}
+</style>
+<script>
+// global variables
+var printAll = false;
+var printOngoing = false;
+
+// functions
+
+function printPage(all) {
+if (!printOngoing) {
+printAll = all;
+printOngoing = true;
+document.execCommand("Print");
+printOngoing = false;
+} else
+alert('Print already ongoing');
+}
+function savePage()   { document.execCommand("SaveAs",true); }
+function refreshPage(){ document.location.href = "refresh"; }
+function showAll() {
+var list = document.getElementsByTagName("DIV");
+for (var i=0; i<list.length;++i) {
+list[i].style.display = "";
+}
+}
+function hideAll() {
+var list = document.getElementsByTagName("DIV");
+for (var i=0; i<list.length;++i) {
+list[i].style.display = "none";
+}
+}
+function saveHiddenStates() {
+var list = document.getElementsByTagName("DIV");
+for (var i=0; i<list.length;++i) {
+list[i].setAttribute("wasDisplayed", list[i].style.display);
+}
+}
+function restoreHiddenStates() {
+var list = document.getElementsByTagName("DIV");
+for (var i=0; i<list.length;++i) {
+list[i].style.display = list[i].wasDisplayed;
+}
+}
+function beforePrint() {
+printOngoing = true;
+if(printAll) {
+saveHiddenStates();
+showAll();
+}
+document.getElementById("Forms").style.display = "none";
+}
+function afterPrint() {
+if(printAll) {
+restoreHiddenStates();
+}
+document.getElementById("Forms").style.display = "";
+}function jumpTo(value) {
+hideAll();
+document.getElementById("Forms").style.display = "";
+divId = value.substring(1,100);
+myNode = document.getElementById(divId);
+myNode.style.display = "";
+var nodes = myNode.getElementsByTagName("DIV");
+for (var i = 0; i < nodes.length; i++) {
+nodes[i].style.display = "";
+}
+// display the header division too
+switch (divId) {
+case "View_Res_Stat":
+case "View_Res_Mov":
+case "View_Res_Drain":
+document.getElementById("View_Res").style.display = "";
+break;
+case "View_EnergyStat":
+document.getElementById("View_Energy").style.display = "";
+break;
+case "View_Prod_Cumul":
+case "View_Prod_Indiv":
+document.getElementById("View_Prod").style.display = "";
+break;
+case "View_Fahr_Einsatz":
+case "View_Fahr_Batterie":
+document.getElementById("View_Fahr").style.display = "";
+break;
+case "View_Dienst_Brok":
+case "View_Dienst_Exp":
+case "View_Dienst_Imp":
+document.getElementById("View_Dienst").style.display = "";
+break;
+}
+window.navigate(value);
+}</script>
+</head>
+<body onAfterPrint="javascript:afterPrint();" onBeforePrint="javascript:beforePrint();">
+<H1>Tecnomatix Plant Simulation 16 Statistics</H1>
+<div class="donotprint" id="Forms">
+<form action="select.htm" name="Formular">
+<select name ="cont" size="1" onchange="jumpTo(this.options[this.selectedIndex].value)">
+<optgroup label="Resource Statistics">
+<option selected value="#View_Res_Stat" label="Resource Statistics">Resource Statistics</option>
+<option value="#View_Res_Drain" label="Drain Statistics">Drain Statistics</option>
+</optgroup>
+<optgroup label="Service Statistics">
+<option value="#View_Dienst_Imp" label="Importer Statistics">Importer Statistics</option>
+<option value="#View_Dienst_Brok" label="Broker Statistics">Broker Statistics</option>
+</optgroup>
+</select>
+<input type="button" value="Show All" name="ShowAll"  onClick="showAll()">
+<input type="button" value="Print This Page" name="Print"    onClick="printPage(false)">
+<input type="button" value="Print All" name="PrintAll" onClick="printPage(true)">
+<input type="button" value="Save" name="Save"     onClick="savePage()">
+<input type="button" value="Refresh" name="Refresh"  onClick="refreshPage()">
+</form>
+</div><!-- select -->
+<div><table>
+<tr>
+<th>Created on</th><td>sábado, 4 de diciembre de 2021 12:13 p. m.</td>
+</tr>
+<tr>
+<th>Model name</th><td>NoName.spp</td>
+</tr>
+<tr>
+<th>Simulation time</th><td>399:11:45:36.7112</td>
+</tr>
+</table><!--Timing Info-->
+</div>
+<div id="View_Res">
+<div id="View_Res_Stat">
+<h2>Resource Statistics - Resource Statistics</h2>
+<figure style="page-break-before:auto" id="R_V0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWorkingPortion">Working</th>
+<th class="CIdx" title="StatSetupPortion">Set-up</th>
+<th class="CIdx" title="StatWaitingPortion">Waiting</th>
+<th class="CIdx" title="StatBlockingPortion">Blocked</th>
+<th class="CIdx" title="StatPoweringUpDownPortion">Powering up/down</th>
+<th class="CIdx" title="StatFailPortion">Failed</th>
+<th class="CIdx" title="StatStoppedPortion">Stopped</th>
+<th class="CIdx" title="StatPausingPortion">Paused</th>
+<th class="CIdx" title="StatUnplannedPortion">Unplanned</th>
+<th class="CFett">Portion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">7.49%</td><td class="NumP">0.00%</td><td class="NumP">4.38%</td><td class="NumP">78.12%</td><td class="NumP">0.00%</td><td class="NumP">10.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="7" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="7" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="7" y="0" width="4" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="11" y="0" width="78" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="89" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="89" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">66.61%</td><td class="NumP">0.00%</td><td class="NumP">0.91%</td><td class="NumP">32.48%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="67" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="67" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="67" y="0" width="1" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="68" y="0" width="32" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">99.91%</td><td class="NumP">0.00%</td><td class="NumP">0.09%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">13.32%</td><td class="NumP">0.00%</td><td class="NumP">86.68%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="13" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="13" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="13" y="0" width="87" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">13.32%</td><td class="NumP">0.00%</td><td class="NumP">86.68%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="13" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="13" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="13" y="0" width="87" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">53.29%</td><td class="NumP">0.00%</td><td class="NumP">46.71%</td><td class="NumP">0.01%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="53" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="53" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="53" y="0" width="47" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">53.29%</td><td class="NumP">0.00%</td><td class="NumP">46.70%</td><td class="NumP">0.01%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="53" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="53" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="53" y="0" width="47" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">1.47%</td><td class="NumP">0.00%</td><td class="NumP">88.55%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">9.98%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="1" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="1" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="1" y="0" width="89" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">1.47%</td><td class="NumP">0.00%</td><td class="NumP">79.49%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">19.04%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="1" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="1" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="1" y="0" width="79" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="80" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="80" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="80" y="0" width="19" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="99" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">5.86%</td><td class="NumP">0.00%</td><td class="NumP">83.98%</td><td class="NumP">0.15%</td><td class="NumP">0.00%</td><td class="NumP">10.01%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="6" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="6" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="6" y="0" width="84" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">5.86%</td><td class="NumP">0.00%</td><td class="NumP">83.99%</td><td class="NumP">0.18%</td><td class="NumP">0.00%</td><td class="NumP">9.97%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="6" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="6" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="6" y="0" width="84" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="100" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">14.32%</td><td class="NumP">0.00%</td><td class="NumP">74.11%</td><td class="NumP">1.56%</td><td class="NumP">0.00%</td><td class="NumP">10.01%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="14" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="14" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="14" y="0" width="74" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="88" y="0" width="2" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">57.28%</td><td class="NumP">0.00%</td><td class="NumP">26.52%</td><td class="NumP">6.25%</td><td class="NumP">0.00%</td><td class="NumP">9.94%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="57" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="57" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="57" y="0" width="27" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="84" y="0" width="6" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">57.28%</td><td class="NumP">0.00%</td><td class="NumP">26.52%</td><td class="NumP">6.25%</td><td class="NumP">0.00%</td><td class="NumP">9.94%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="57" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="57" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="57" y="0" width="27" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="84" y="0" width="6" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">14.32%</td><td class="NumP">0.00%</td><td class="NumP">74.13%</td><td class="NumP">1.56%</td><td class="NumP">0.00%</td><td class="NumP">9.98%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="14" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="14" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="14" y="0" width="74" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="88" y="0" width="2" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="90" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="90" y="0" width="10" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">100.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td><td class="NumPFett"><svg class="portionsbar resources" style="margin: 3px 1px 0 1px; nobr; width: 100px; height: 10px;">
+<rect x="0" y="0" width="0" height="9" fill="#00F500">
+<title>Working</title>
+</rect>
+<rect x="0" y="0" width="0" height="9" fill="#BE8E32">
+<title>Set-up</title>
+</rect>
+<rect x="0" y="0" width="100" height="9" fill="#BEBEBE">
+<title>Waiting</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#F5EB00">
+<title>Blocking</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#BE1EFF">
+<title>Powering up/down</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF0000">
+<title>Failed</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#FF9BAA">
+<title>Stopped</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#0000FF">
+<title>Paused</title>
+</rect>
+<rect x="100" y="0" width="0" height="9" fill="#40A0FF">
+<title>Unplanned</title>
+</rect>
+</svg><!-- bargraphics -->
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Portions of the States</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_M0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatNumIn">Number of Entries</th>
+<th class="CIdx" title="StatNumOut">Number of Exits</th>
+<th class="CIdx" title="StatMinNumMU">Minimum Contents</th>
+<th class="CIdx" title="StatMaxNumMU">Maximum Contents</th>
+<th class="CFett" title="StatRelativeEmptyPortion">Relative Empty</th>
+<th class="CFett" title="StatRelativeFullPortion">Relative Full</th>
+<th class="CFett" title="StatRelativeOccupation">Relative Occupation without Interruptions</th>
+<th class="CIdx" title="StatRelativeOccupationIR">Relative Occupation with Interruptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">2299057</td><td class="NumP">2299056</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">0.00%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">100.00%</td><td class="NumP">100.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">2299055</td><td class="NumP">2299054</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">4.86%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">95.14%</td><td class="NumP">95.14%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">2299054</td><td class="NumP">2299047</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">1.18%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">94.94%</td><td class="NumP">94.94%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">2299047</td><td class="NumP">2299046</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">0.91%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">99.09%</td><td class="NumP">99.09%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">2299046</td><td class="NumP">2299039</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">0.08%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">97.60%</td><td class="NumP">97.60%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">2299039</td><td class="NumP">2299038</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">0.09%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">99.91%</td><td class="NumP">99.91%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">86.68%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">13.32%</td><td class="NumP">13.32%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">86.68%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">13.32%</td><td class="NumP">13.32%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">919615</td><td class="NumP">919615</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">46.71%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">53.29%</td><td class="NumP">53.29%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">919615</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">46.70%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">53.30%</td><td class="NumP">53.30%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">4</td><td class="NumPFett">93.72%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">1.01%</td><td class="NumP">1.01%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">3</td><td class="NumPFett">90.63%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">1.55%</td><td class="NumP">1.55%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">919614</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">80.09%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">4.15%</td><td class="NumP">4.15%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">919615</td><td class="NumP">919615</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">80.08%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">4.15%</td><td class="NumP">4.15%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">98.37%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">1.63%</td><td class="NumP">1.62%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">98.19%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">1.81%</td><td class="NumP">1.83%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">919615</td><td class="NumP">919615</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">93.32%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">6.68%</td><td class="NumP">6.70%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">919614</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">93.29%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">6.71%</td><td class="NumP">6.72%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">3</td><td class="NumPFett">94.85%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">0.86%</td><td class="NumP">0.86%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">919614</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">67.04%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">10.32%</td><td class="NumP">10.32%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">919615</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">7</td><td class="NumPFett">66.93%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">10.31%</td><td class="NumP">10.31%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">3</td><td class="NumPFett">94.93%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">0.83%</td><td class="NumP">0.83%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">229904</td><td class="NumP">229903</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">82.35%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">17.65%</td><td class="NumP">17.65%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">919614</td><td class="NumP">919613</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">29.45%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">70.55%</td><td class="NumP">70.52%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">919614</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">29.45%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">70.55%</td><td class="NumP">70.53%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">82.35%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">17.65%</td><td class="NumP">17.64%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">229904</td><td class="NumP">229904</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">100.00%</td><td class="NumPFett">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">229903</td><td class="NumP">229903</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">100.00%</td><td class="NumPFett">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">919613</td><td class="NumP">919613</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">100.00%</td><td class="NumPFett">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">919614</td><td class="NumP">919614</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">100.00%</td><td class="NumPFett">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">2299034</td><td class="NumP">2299034</td><td class="NumP">0</td><td class="NumP">1</td><td class="NumPFett">100.00%</td><td class="NumPFett">-&nbsp;</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Material Flow Properties</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_A0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWorkingPortion">Portion</th>
+<th class="CIdx" title="StatWorkingCount">Count</th>
+<th class="CIdx" title="StatWorkingTime">Sum</th>
+<th class="CIdx" title="StatWorkingMu">Mean Value</th>
+<th class="CIdx" title="StatWorkingDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">7.49%</td><td class="NumP">2299055</td><td class="NumP">29:22:27:16.8750</td><td class="NumP">1.1250</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">66.61%</td><td class="NumP">2299047</td><td class="NumP">266:02:14:29.3667</td><td class="NumP">10.0000</td><td class="NumP">0.0004</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">99.91%</td><td class="NumP">2299039</td><td class="NumP">399:03:19:42.7000</td><td class="NumP">15.0000</td><td class="NumP">0.0015</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">13.32%</td><td class="NumP">229904</td><td class="NumP">53:05:14:40.0000</td><td class="NumP">20.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">13.32%</td><td class="NumP">229904</td><td class="NumP">53:05:14:40.0000</td><td class="NumP">20.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">53.29%</td><td class="NumP">919615</td><td class="NumP">212:20:58:20.0000</td><td class="NumP">20.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">53.29%</td><td class="NumP">919615</td><td class="NumP">212:20:58:12.7000</td><td class="NumP">20.0000</td><td class="NumP">0.0076</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">1.47%</td><td class="NumP">229904</td><td class="NumP">5:20:29:48.8000</td><td class="NumP">2.2000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">1.47%</td><td class="NumP">229904</td><td class="NumP">5:20:29:48.8000</td><td class="NumP">2.2000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">5.86%</td><td class="NumP">919615</td><td class="NumP">23:09:59:13.0000</td><td class="NumP">2.2000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">5.86%</td><td class="NumP">919614</td><td class="NumP">23:09:59:10.8000</td><td class="NumP">2.2000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">100.00%</td><td class="NumP">1</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">14.32%</td><td class="NumP">229904</td><td class="NumP">57:05:02:07.0000</td><td class="NumP">21.5000</td><td class="NumP">0.0188</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">57.28%</td><td class="NumP">919614</td><td class="NumP">228:20:08:21.0000</td><td class="NumP">21.5000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">57.28%</td><td class="NumP">919614</td><td class="NumP">228:20:08:21.0000</td><td class="NumP">21.5000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">14.32%</td><td class="NumP">229904</td><td class="NumP">57:05:02:16.0000</td><td class="NumP">21.5000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">2299034</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Working Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_R0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CFett" title="StatSetupPortion">Portion</th>
+<th class="CIdx" title="StatSetupCount">Count</th>
+<th class="CIdx" title="StatSetupTime">Sum</th>
+<th class="CIdx" title="StatSetupMu">Mean Value</th>
+<th class="CIdx" title="StatSetupDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Set-up Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_W0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWaitingPortion">Portion</th>
+<th class="CIdx" title="StatWaitingCount">Count</th>
+<th class="CIdx" title="StatWaitingTime">Sum</th>
+<th class="CIdx" title="StatWaitingMu">Mean Value</th>
+<th class="CIdx" title="StatWaitingDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">4.38%</td><td class="NumP">313371</td><td class="NumP">17:11:42:15.8216</td><td class="NumP">4.8216</td><td class="NumP">0.9600</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.91%</td><td class="NumP">8361</td><td class="NumP">3:15:11:49.1349</td><td class="NumP">37.5444</td><td class="NumP">35.6820</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.09%</td><td class="NumP">870</td><td class="NumP">8:25:54.0112</td><td class="NumP">34.8897</td><td class="NumP">32.0913</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">86.68%</td><td class="NumP">229905</td><td class="NumP">346:06:30:56.7112</td><td class="NumP">2:10.1314</td><td class="NumP">3.8180</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">86.68%</td><td class="NumP">229905</td><td class="NumP">346:06:30:56.7112</td><td class="NumP">2:10.1314</td><td class="NumP">3.5138</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">46.71%</td><td class="NumP">919616</td><td class="NumP">186:14:07:18.9338</td><td class="NumP">17.5304</td><td class="NumP">13.0854</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">46.70%</td><td class="NumP">919615</td><td class="NumP">186:13:55:37.7658</td><td class="NumP">17.5297</td><td class="NumP">13.0855</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">88.55%</td><td class="NumP">229278</td><td class="NumP">353:18:26:04.5720</td><td class="NumP">2:13.3122</td><td class="NumP">28.3148</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">79.49%</td><td class="NumP">228045</td><td class="NumP">317:13:25:43.8092</td><td class="NumP">2:00.3146</td><td class="NumP">36.1519</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">83.98%</td><td class="NumP">867533</td><td class="NumP">335:11:37:14.1164</td><td class="NumP">33.4118</td><td class="NumP">13.8150</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">83.99%</td><td class="NumP">867490</td><td class="NumP">335:12:40:37.2254</td><td class="NumP">33.4178</td><td class="NumP">13.8110</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">74.11%</td><td class="NumP">223999</td><td class="NumP">296:01:19:23.7231</td><td class="NumP">1:54.1932</td><td class="NumP">41.2702</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">26.52%</td><td class="NumP">570040</td><td class="NumP">105:22:39:14.8769</td><td class="NumP">16.0577</td><td class="NumP">20.2559</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">26.52%</td><td class="NumP">571416</td><td class="NumP">105:22:43:46.6053</td><td class="NumP">16.0195</td><td class="NumP">20.1389</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">74.13%</td><td class="NumP">226308</td><td class="NumP">296:03:36:36.1514</td><td class="NumP">1:53.0645</td><td class="NumP">34.3362</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">100.00%</td><td class="NumP">229905</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">2:30.1313</td><td class="NumP">41.4634</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">100.00%</td><td class="NumP">229904</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">2:30.1320</td><td class="NumP">49.7292</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">100.00%</td><td class="NumP">919614</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">37.5331</td><td class="NumP">26.0585</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">100.00%</td><td class="NumP">919615</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">37.5330</td><td class="NumP">26.0259</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">100.00%</td><td class="NumP">2299035</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">15.0132</td><td class="NumP">9.0524</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Waiting Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_B0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatBlockingPortion">Portion</th>
+<th class="CIdx" title="StatBlockingCount">Count</th>
+<th class="CIdx" title="StatBlockingTime">Sum</th>
+<th class="CIdx" title="StatBlockingMu">Mean Value</th>
+<th class="CIdx" title="StatBlockingDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">100.00%</td><td class="NumP">2299057</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">15.0131</td><td class="NumP">11.1810</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">78.12%</td><td class="NumP">2012665</td><td class="NumP">312:02:24:59.3380</td><td class="NumP">13.3979</td><td class="NumP">2.0283</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">32.48%</td><td class="NumP">2246106</td><td class="NumP">129:18:19:18.2096</td><td class="NumP">4.9916</td><td class="NumP">0.1637</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.01%</td><td class="NumP">80</td><td class="NumP">39:57.7774</td><td class="NumP">29.9722</td><td class="NumP">27.8036</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.01%</td><td class="NumP">85</td><td class="NumP">51:46.2454</td><td class="NumP">36.5441</td><td class="NumP">33.3437</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.15%</td><td class="NumP">2259</td><td class="NumP">14:32:55.7894</td><td class="NumP">23.1854</td><td class="NumP">22.8092</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.18%</td><td class="NumP">2511</td><td class="NumP">17:09:51.5155</td><td class="NumP">24.6083</td><td class="NumP">26.2627</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">1.56%</td><td class="NumP">229903</td><td class="NumP">6:05:50:38.3730</td><td class="NumP">2.3464</td><td class="NumP">0.1013</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">6.25%</td><td class="NumP">919614</td><td class="NumP">24:23:28:10.5473</td><td class="NumP">2.3467</td><td class="NumP">0.0905</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">6.25%</td><td class="NumP">919614</td><td class="NumP">24:23:27:34.2535</td><td class="NumP">2.3467</td><td class="NumP">0.0920</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">1.56%</td><td class="NumP">229904</td><td class="NumP">6:05:51:04.7519</td><td class="NumP">2.3465</td><td class="NumP">0.1003</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Blocked Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_Pw0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatPoweringUpDownPortion">Portion</th>
+<th class="CIdx" title="StatPoweringUpDownCount">Count</th>
+<th class="CIdx" title="StatPoweringUpDownTime">Sum</th>
+<th class="CIdx" title="StatPoweringUpDownMu">Mean Value</th>
+<th class="CIdx" title="StatPoweringUpDownDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Powering up/down Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_Stp0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatStoppedPortion">Portion</th>
+<th class="CIdx" title="StatStoppedCount">Count</th>
+<th class="CIdx" title="StatStoppedTime">Sum</th>
+<th class="CIdx" title="StatStoppedMu">Mean Value</th>
+<th class="CIdx" title="StatStoppedDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Stopped Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_S0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatFailPortion">Portion</th>
+<th class="CIdx" title="StatFailCount">Count</th>
+<th class="CIdx" title="StatFailTime">Sum</th>
+<th class="CIdx" title="StatFailMu">Mean Value</th>
+<th class="CIdx" title="StatFailDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">10.00%</td><td class="NumP">57473</td><td class="NumP">39:23:11:04.6766</td><td class="NumP">1:00.0815</td><td class="NumP">42.5499</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">9.98%</td><td class="NumP">57233</td><td class="NumP">39:20:49:43.3392</td><td class="NumP">1:00.1853</td><td class="NumP">42.2570</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">19.04%</td><td class="NumP">103645</td><td class="NumP">76:01:50:04.1019</td><td class="NumP">1:03.4184</td><td class="NumP">46.6798</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">10.01%</td><td class="NumP">57589</td><td class="NumP">39:23:36:13.8054</td><td class="NumP">59.9867</td><td class="NumP">42.3494</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">9.97%</td><td class="NumP">57230</td><td class="NumP">39:19:55:57.1702</td><td class="NumP">1:00.1320</td><td class="NumP">42.2905</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">10.01%</td><td class="NumP">57765</td><td class="NumP">39:23:33:27.6151</td><td class="NumP">59.8010</td><td class="NumP">42.1428</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">9.94%</td><td class="NumP">57181</td><td class="NumP">39:17:29:50.2871</td><td class="NumP">1:00.0303</td><td class="NumP">42.3495</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">9.94%</td><td class="NumP">57234</td><td class="NumP">39:17:25:54.8524</td><td class="NumP">59.9706</td><td class="NumP">42.6229</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">9.98%</td><td class="NumP">57741</td><td class="NumP">39:21:15:39.8079</td><td class="NumP">59.6827</td><td class="NumP">42.1343</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Failed Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_P0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatPausingPortion">Portion</th>
+<th class="CIdx" title="StatPausingCount">Count</th>
+<th class="CIdx" title="StatPausingTime">Sum</th>
+<th class="CIdx" title="StatPausingMu">Mean Value</th>
+<th class="CIdx" title="StatPausingDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Paused Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="R_L0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatEmptyPortion">Portion</th>
+<th class="CIdx" title="StatEmptyCount">Count</th>
+<th class="CIdx" title="StatEmptyTime">Sum</th>
+<th class="CIdx" title="StatEmptyMu">Mean Value</th>
+<th class="CIdx" title="StatEmptyDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">4.38%</td><td class="NumP">313371</td><td class="NumP">17:11:42:15.8216</td><td class="NumP">4.8216</td><td class="NumP">0.9600</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor"> Conveyor</th><td class="NumP">1.18%</td><td class="NumP">11668</td><td class="NumP">4:17:17:52.1416</td><td class="NumP">34.9565</td><td class="NumP">36.0385</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.91%</td><td class="NumP">8361</td><td class="NumP">3:15:11:49.1349</td><td class="NumP">37.5444</td><td class="NumP">35.6820</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor1"> Conveyor1</th><td class="NumP">0.08%</td><td class="NumP">758</td><td class="NumP">7:18:02.1744</td><td class="NumP">34.6731</td><td class="NumP">31.6642</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.09%</td><td class="NumP">870</td><td class="NumP">8:25:54.0112</td><td class="NumP">34.8897</td><td class="NumP">32.0913</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">86.68%</td><td class="NumP">229905</td><td class="NumP">346:06:30:56.7112</td><td class="NumP">2:10.1314</td><td class="NumP">3.8180</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">86.68%</td><td class="NumP">229905</td><td class="NumP">346:06:30:56.7112</td><td class="NumP">2:10.1314</td><td class="NumP">3.5138</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">46.71%</td><td class="NumP">919616</td><td class="NumP">186:14:07:18.9338</td><td class="NumP">17.5304</td><td class="NumP">13.0854</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">46.70%</td><td class="NumP">919615</td><td class="NumP">186:13:55:37.7658</td><td class="NumP">17.5297</td><td class="NumP">13.0855</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor2"> Conveyor2</th><td class="NumP">93.72%</td><td class="NumP">229283</td><td class="NumP">374:09:25:32.1006</td><td class="NumP">2:21.0812</td><td class="NumP">16.4334</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor21"> Conveyor21</th><td class="NumP">90.63%</td><td class="NumP">228119</td><td class="NumP">362:01:51:22.6104</td><td class="NumP">2:17.1367</td><td class="NumP">22.5552</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor22"> Conveyor22</th><td class="NumP">80.09%</td><td class="NumP">867481</td><td class="NumP">319:23:17:09.8968</td><td class="NumP">31.8686</td><td class="NumP">13.4277</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor23"> Conveyor23</th><td class="NumP">80.08%</td><td class="NumP">867515</td><td class="NumP">319:21:51:25.6272</td><td class="NumP">31.8614</td><td class="NumP">13.4397</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">88.55%</td><td class="NumP">229278</td><td class="NumP">353:18:25:47.8961</td><td class="NumP">2:13.3122</td><td class="NumP">28.3147</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">79.49%</td><td class="NumP">228045</td><td class="NumP">317:13:25:26.9716</td><td class="NumP">2:00.3145</td><td class="NumP">36.1519</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">83.98%</td><td class="NumP">867533</td><td class="NumP">335:11:36:56.4045</td><td class="NumP">33.4118</td><td class="NumP">13.8149</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">83.99%</td><td class="NumP">867490</td><td class="NumP">335:12:40:16.8606</td><td class="NumP">33.4178</td><td class="NumP">13.8108</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor211"> Conveyor211</th><td class="NumP">94.85%</td><td class="NumP">226950</td><td class="NumP">378:21:46:14.9248</td><td class="NumP">2:24.2502</td><td class="NumP">39.6165</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor221"> Conveyor221</th><td class="NumP">67.04%</td><td class="NumP">684219</td><td class="NumP">267:19:32:34.2974</td><td class="NumP">33.8183</td><td class="NumP">21.5999</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor231"> Conveyor231</th><td class="NumP">66.93%</td><td class="NumP">682955</td><td class="NumP">267:09:13:06.2350</td><td class="NumP">33.8265</td><td class="NumP">21.6889</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Conveyor24"> Conveyor24</th><td class="NumP">94.93%</td><td class="NumP">228444</td><td class="NumP">379:05:42:10.2425</td><td class="NumP">2:23.4318</td><td class="NumP">29.7513</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">74.11%</td><td class="NumP">223999</td><td class="NumP">296:01:19:23.7231</td><td class="NumP">1:54.1932</td><td class="NumP">41.2702</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">26.52%</td><td class="NumP">570040</td><td class="NumP">105:22:39:14.8769</td><td class="NumP">16.0577</td><td class="NumP">20.2559</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">26.52%</td><td class="NumP">571416</td><td class="NumP">105:22:43:46.6053</td><td class="NumP">16.0195</td><td class="NumP">20.1389</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">74.13%</td><td class="NumP">226308</td><td class="NumP">296:03:36:36.1514</td><td class="NumP">1:53.0645</td><td class="NumP">34.3362</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">100.00%</td><td class="NumP">229905</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">2:30.1313</td><td class="NumP">41.4634</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">100.00%</td><td class="NumP">229904</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">2:30.1320</td><td class="NumP">49.7292</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">100.00%</td><td class="NumP">919614</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">37.5331</td><td class="NumP">26.0585</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">100.00%</td><td class="NumP">919615</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">37.5330</td><td class="NumP">26.0259</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Drain"> Drain</th><td class="NumP">100.00%</td><td class="NumP">2299035</td><td class="NumP">399:11:45:36.7112</td><td class="NumP">15.0132</td><td class="NumP">9.0524</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Empty Time</figcaption>
+</figure> <!-- table -->
+</div>
+<div id="View_Res_Drain">
+<h2>Resource Statistics - Drain Statistics</h2>
+<figure style="page-break-before:auto" id="D_C0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="typeStatisticsCumulated">Working</th>
+<th class="CIdx" title="typeStatisticsCumulated">Set-up</th>
+<th class="CIdx" title="typeStatisticsCumulated">Waiting</th>
+<th class="CIdx" title="typeStatisticsCumulated">Stopped</th>
+<th class="CIdx" title="typeStatisticsCumulated">Failed</th>
+<th class="CIdx" title="typeStatisticsCumulated">Paused</th>
+<th class="CFett" title="StatAvgLifeSpan">Mean Life Time</th>
+<th class="CIdx" title="StatAvgExitInterval">Mean Exit Time</th>
+<th class="CIdx" title="StatDeleted">Total Throughput</th>
+<th class="CIdx" title="StatThroughputPerHour">Throughput per Hour</th>
+<th class="CIdx" title="StatThroughputPerDay">Throughput per Day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Drain</th><td class="NumP">29.97%</td><td class="NumP">0.00%</td><td class="NumP">68.80%</td><td class="NumP">0.00%</td><td class="NumP">1.23%</td><td class="NumP">0.00%</td><td class="NumPFett">5:52.3852</td><td class="NumP">15.0132</td><td class="NumP">2299034</td><td class="NumP">239.78843</td><td class="NumP">5754.9224</td></tr>
+</tbody>
+</table>
+<figcaption>Cumulated Statistics of the Parts which the Drain Deleted</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="D_A0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatDeleted">All Types</th>
+<th class="CIdx" title="typeStatistics">Part</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Drain</th><td class="NumP">2299034</td><td class="NumPFett">2299034</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Part Types which the Drain Deleted</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="D_D0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="RIdx"  rowspan="2">Drain</th>
+<th class="CIdx"  colspan="7">Production</th>
+<th class="CFett" colspan="7">Transport</th>
+<th class="CFett" colspan="7">Storage</th>
+</tr>
+<tr>
+<th class="CIdx" title="typeStatistics">Working</th>
+<th class="CIdx" title="typeStatistics">Set-up</th>
+<th class="CIdx" title="typeStatistics">Waiting</th>
+<th class="CIdx" title="typeStatistics">Stopped</th>
+<th class="CIdx" title="typeStatistics">Failed</th>
+<th class="CIdx" title="typeStatistics">Paused</th>
+<th class="CFett" title="typeStatistics">Sum</th>
+<th class="CFett" title="typeStatistics">Working</th>
+<th class="CIdx" title="typeStatistics">Set-up</th>
+<th class="CIdx" title="typeStatistics">Waiting</th>
+<th class="CIdx" title="typeStatistics">Stopped</th>
+<th class="CIdx" title="typeStatistics">Failed</th>
+<th class="CIdx" title="typeStatistics">Paused</th>
+<th class="CFett" title="typeStatistics">Sum</th>
+<th class="CFett" title="typeStatistics">Working</th>
+<th class="CIdx" title="typeStatistics">Set-up</th>
+<th class="CIdx" title="typeStatistics">Waiting</th>
+<th class="CIdx" title="typeStatistics">Stopped</th>
+<th class="CIdx" title="typeStatistics">Failed</th>
+<th class="CIdx" title="typeStatistics">Paused</th>
+<th class="CFett" title="typeStatistics">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Part<td class="NumP">19.81%<td class="NumP">0.00%<td class="NumP">9.65%<td class="NumP">0.00%<td class="NumP">1.23%<td class="NumP">0.00%</td><td class="NumPFett">30.70%<td class="NumPFett">10.15%<td class="NumP">0.00%<td class="NumP">59.15%<td class="NumP">0.00%<td class="NumP">0.00%<td class="NumP">0.00%</td><td class="NumPFett">69.30%<td class="NumPFett">0.00%<td class="NumP">0.00%<td class="NumP">0.00%<td class="NumP">0.00%<td class="NumP">0.00%<td class="NumP">0.00%</td><td class="NumPFett">0.00%</tr>
+</tbody>
+</table>
+<figcaption>Detailed Statistics of the Part Types which the Drain Deleted</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="D_DD0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="RIdx"  rowspan="2">Drain</th>
+<th class="CIdx"  colspan="4">Life Time</th>
+<th class="CFett" colspan="4">Exit Time</th>
+<th class="CFett" colspan="3">Throughput</th>
+</tr>
+<tr>
+<th class="CIdx" title="typeStatistics">Mean Value</th>
+<th class="CIdx" title="typeStatistics">Standard Deviation</th>
+<th class="CIdx" title="typeStatistics">Minimum</th>
+<th class="CIdx" title="typeStatistics">Maximum</th>
+<th class="CFett" title="typeStatistics">Mean Value</th>
+<th class="CIdx" title="typeStatistics">Standard Deviation</th>
+<th class="CIdx" title="typeStatistics">Minimum</th>
+<th class="CIdx" title="typeStatistics">Maximum</th>
+<th class="CFett" title="typeStatistics">Total</th>
+<th class="CIdx" title="typeStatistics">Per Hour</th>
+<th class="CIdx" title="typeStatistics">Per Day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Part</th><td class="NumP">5:52.3852</td><td class="NumP">51.2076</td><td class="NumP">2:14.4123</td><td class="NumP">18:06.4592</td><td class="NumPFett">15.0132</td><td class="NumP">9.0520</td><td class="NumP">0.0000</td><td class="NumP">3:17.9178</td><td class="NumPFett">2299034</td><td class="NumP">239.78843</td><td class="NumP">5754.9224</td></tr>
+</tbody>
+</table>
+</figure> <!-- table -->
+</div>
+</div>
+<div id="View_Dienst">
+<div id="View_Dienst_Imp">
+<h2>Service Statistics - Importer Statistics</h2>
+<figure style="page-break-before:auto" id="I_I0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="RIdx"  rowspan="2">Object</th>
+<th class="CIdx"  rowspan="2" title="StatWaitingSetupExpPortion+StatWaitingResPortion">Total Delay</th>
+<th class="CFett" colspan="3">Reason for the Delay</th>
+</tr>
+<tr>
+<th class="CFett" title="StatWaitingResPortion">Waiting for Services and Parts</th>
+<th class="CIdx" title="StatWaitingPartsPortion">Waiting for Parts</th>
+<th class="CIdx" title="StatWaitingSetupExpPortion">Waiting for Set-up Exporters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Importers Waiting for Services and Parts</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="I_E0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWaitingResPortion">Waiting for Services and Parts</th>
+<th class="CIdx" title="StatWaitingResCount">Count</th>
+<th class="CIdx" title="StatWaitingResTime">Sum</th>
+<th class="CIdx" title="StatWaitingResMu">Mean Value</th>
+<th class="CIdx" title="StatWaitingResDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">1</td><td class="NumP">16.6760</td><td class="NumP">16.6760</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">1</td><td class="NumP">16.8376</td><td class="NumP">16.8376</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">1</td><td class="NumP">17.7118</td><td class="NumP">17.7118</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">1</td><td class="NumP">20.3649</td><td class="NumP">20.3649</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Waiting Times for Services and Parts</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="I_BE0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWaitingPartsPortion">Waiting for Parts</th>
+<th class="CIdx" title="StatWaitingPartsCount">Count</th>
+<th class="CIdx" title="StatWaitingPartsTime">Sum</th>
+<th class="CIdx" title="StatWaitingPartsMu">Mean Value</th>
+<th class="CIdx" title="StatWaitingPartsDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Waiting Times for Parts</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="I_R0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Object</th>
+<th class="CIdx" title="StatWaitingSetupExpPortion">Waiting for Set-up Exporters</th>
+<th class="CIdx" title="StatWaitingSetupExpCount">Count</th>
+<th class="CIdx" title="StatWaitingSetupExpTime">Sum</th>
+<th class="CIdx" title="StatWaitingSetupExpMu">Mean Value</th>
+<th class="CIdx" title="StatWaitingSetupExpDelta">Standard Deviation</th>
+<th class="CFett" title="StatWaitingSetupExpWaitingPortion">Waiting Time while the Resource Waited</th>
+<th class="CIdx" title="StatWaitingSetupExpWorkingPortion">Waiting Time while the Resource Worked</th>
+<th class="CIdx" title="StatWaitingSetupExpBlockingPortion">Waiting Time while the Resource was Blocked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Source"> Source</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Volcado"> Volcado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Lavado_secado"> Lavado_secado</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Clasificación"> Clasificación</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.baj_calidad_pequeño"> baj_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Baja_calidad_grande"> Baja_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_pequeño"> Alta_calidad_pequeño</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Alta_calidad_grande"> Alta_calidad_grande</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque1"> Empaque1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque2"> Empaque2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque3"> Empaque3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Empaque4"> Empaque4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección2"> Recolección2</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección3"> Recolección3</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección4"> Recolección4</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Recolección1"> Recolección1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer"> Buffer</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer1"> Buffer1</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer11"> Buffer11</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+<tr>
+<th class="RIdx" title=".Models.Model.Buffer111"> Buffer111</th><td class="NumP">0.00%</td><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumPFett">0.00%</td><td class="NumP">0.00%</td><td class="NumP">0.00%</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Waiting Times for Set-up Exporters</figcaption>
+</figure> <!-- table -->
+</div>
+<div id="View_Dienst_Brok">
+<h2>Service Statistics - Broker Statistics</h2>
+<figure style="page-break-before:auto" id="B_W0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="RIdx"  rowspan="2">Object</th>
+<th class="CIdx"  colspan="4">Sum</th>
+<th class="CFett" colspan="3">Mediation Time</th>
+<th class="CFett" colspan="3">Dwelling Time</th>
+</tr>
+<tr>
+<th class="CIdx" title="StatOpenRequests">Open Requests</th>
+<th class="CIdx" title="StatSatisfiedRequests">Satisfied Requests</th>
+<th class="CIdx" title="StatOpenCapacity">Open Capacity</th>
+<th class="CIdx" title="StatMediatedCapacity">Mediated Capacity</th>
+<th class="CFett" title="StatMediationtime">Sum</th>
+<th class="CIdx" title="StatMediationtimeMu">Mean Value</th>
+<th class="CIdx" title="StatMediationtimeDelta">Standard Deviation</th>
+<th class="CFett" title="StatStaytime">Sum</th>
+<th class="CIdx" title="StatStaytimeMu">Mean Value</th>
+<th class="CIdx" title="StatStaytimeDelta">Standard Deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx" title=".Models.Model.Broker"> Broker</th><td class="NumP">2299056</td><td class="NumP">6907175</td><td class="NumP">2299056</td><td class="NumP">6907175</td><td class="NumPFett">316:13:43:02.9262</td><td class="NumP">11.8970</td><td class="NumP">11.1810</td><td class="NumPFett">211:08:58:51.7453</td><td class="NumP">2.6440</td><td class="NumP">2.9152</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Broker Statistics</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="B_SM0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Services</th>
+<th class="CIdx" title="serviceStat">Count</th>
+<th class="CIdx" title="serviceStat">Sum</th>
+<th class="CIdx" title="serviceStat">Mean Value</th>
+<th class="CIdx" title="serviceStat">Standard Deviation</th>
+<th class="CIdx" title="serviceStat">Minimum</th>
+<th class="CIdx" title="serviceStat">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Empaque1</th><td class="NumP">229904</td><td class="NumP">6:11:31:41.7700</td><td class="NumP">2.4354</td><td class="NumP">4.4811</td><td class="NumP">2.2000</td><td class="NumP">3:53.0344</td></tr>
+<tr>
+<th class="RIdx"> Empaque2</th><td class="NumP">229904</td><td class="NumP">7:07:09:52.6743</td><td class="NumP">2.7429</td><td class="NumP">7.2996</td><td class="NumP">2.2000</td><td class="NumP">5:28.5312</td></tr>
+<tr>
+<th class="RIdx"> Empaque3</th><td class="NumP">919615</td><td class="NumP">26:01:46:13.4324</td><td class="NumP">2.4497</td><td class="NumP">4.7328</td><td class="NumP">2.2000</td><td class="NumP">5:43.6163</td></tr>
+<tr>
+<th class="RIdx"> Empaque4</th><td class="NumP">919614</td><td class="NumP">26:00:35:12.4993</td><td class="NumP">2.4451</td><td class="NumP">4.7065</td><td class="NumP">2.2000</td><td class="NumP">7:18.1693</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion1</th><td class="NumP">230942</td><td class="NumP">6:06:11:32.3337</td><td class="NumP">2.3412</td><td class="NumP">0.1625</td><td class="NumP">2.3517</td><td class="NumP">21.8871</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion2</th><td class="NumP">230952</td><td class="NumP">6:06:11:30.1017</td><td class="NumP">2.3411</td><td class="NumP">0.1633</td><td class="NumP">2.3517</td><td class="NumP">22.0069</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion3</th><td class="NumP">923588</td><td class="NumP">25:00:45:05.4816</td><td class="NumP">2.3416</td><td class="NumP">0.1554</td><td class="NumP">2.3517</td><td class="NumP">22.8762</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion4</th><td class="NumP">923600</td><td class="NumP">25:00:45:09.6672</td><td class="NumP">2.3416</td><td class="NumP">0.1560</td><td class="NumP">2.3517</td><td class="NumP">25.5292</td></tr>
+<tr>
+<th class="RIdx"> StandardService</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Volcado</th><td class="NumP">2299056</td><td class="NumP">82:22:02:33.7850</td><td class="NumP">3.1161</td><td class="NumP">0.0006</td><td class="NumP">3.1161</td><td class="NumP">4.0546</td></tr>
+</tbody>
+</table>
+<figcaption>Dwelling Time</figcaption>
+</figure> <!-- table -->
+<figure style="page-break-before:auto" id="B_SW0">
+<table class="Auswertungen">
+<thead>
+<tr>
+<th class="CIdx">Services</th>
+<th class="CIdx" title="serviceStat">Count</th>
+<th class="CIdx" title="serviceStat">Sum</th>
+<th class="CIdx" title="serviceStat">Mean Value</th>
+<th class="CIdx" title="serviceStat">Standard Deviation</th>
+<th class="CIdx" title="serviceStat">Minimum</th>
+<th class="CIdx" title="serviceStat">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="RIdx"> Empaque1</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Empaque2</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Empaque3</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Empaque4</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion1</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion2</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion3</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Recoleccion4</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> StandardService</th><td class="NumP">0</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td><td class="NumP">0.0000</td></tr>
+<tr>
+<th class="RIdx"> Volcado</th><td class="NumP">2299056</td><td class="NumP">316:13:43:02.9262</td><td class="NumP">11.8970</td><td class="NumP">11.1810</td><td class="NumP">3.1161</td><td class="NumP">6:34.0154</td></tr>
+</tbody>
+</table>
+<figcaption>Mediation Time</figcaption>
+</figure> <!-- table -->
+</div>
+</div>
+</body>
+</html>
