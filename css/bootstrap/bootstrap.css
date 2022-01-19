@@ -4564,15 +4564,16 @@ input[type="button"].btn-block {
 .nav-link {
     display: block;
     padding: 0.5rem 1rem;
+    color: white;
 }
 
 .nav-link:hover,
 .nav-link:focus {
-    text-decoration: none;
+    color: yellow;
 }
 
 .nav-link.disabled {
-    color: #6c757d;
+    color: yellow;
     pointer-events: none;
     cursor: default;
 }
@@ -4587,6 +4588,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link {
     border: 1px solid transparent;
+    color: yellow;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
@@ -4597,14 +4599,14 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs .nav-link.disabled {
-    color: #6c757d;
+    color: white;
     background-color: transparent;
     border-color: transparent;
 }
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #495057;
+    color: white;
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -4617,11 +4619,12 @@ input[type="button"].btn-block {
 
 .nav-pills .nav-link {
     border-radius: 0.25rem;
+    color: yellow;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-    color: #fff;
+    color: yellow;
     background-color: #007bff;
 }
 
@@ -4709,6 +4712,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-nav .nav-link {
+    color: yellow;
     padding-right: 0;
     padding-left: 0;
 }
@@ -4789,6 +4793,7 @@ input[type="button"].btn-block {
     .navbar-expand-sm .navbar-nav .nav-link {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
+        color: yellow;
     }
     .navbar-expand-sm>.container,
     .navbar-expand-sm>.container-fluid {
@@ -4837,6 +4842,7 @@ input[type="button"].btn-block {
     .navbar-expand-md .navbar-nav .nav-link {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
+        color: yellow;
     }
     .navbar-expand-md>.container,
     .navbar-expand-md>.container-fluid {
@@ -4884,6 +4890,7 @@ input[type="button"].btn-block {
     }
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 0.5rem;
+        color: yellow;
         padding-left: 0.5rem;
     }
     .navbar-expand-lg>.container,
@@ -4933,6 +4940,7 @@ input[type="button"].btn-block {
     .navbar-expand-xl .navbar-nav .nav-link {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
+        color: yellow;
     }
     .navbar-expand-xl>.container,
     .navbar-expand-xl>.container-fluid {
@@ -4981,6 +4989,7 @@ input[type="button"].btn-block {
 .navbar-expand .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+    color: yellow;
 }
 
 .navbar-expand>.container,
@@ -5007,31 +5016,31 @@ input[type="button"].btn-block {
 
 .navbar-light .navbar-brand:hover,
 .navbar-light .navbar-brand:focus {
-    color: rgba(0, 0, 0, 0.9);
+    color: white;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgba(0, 0, 0, 0.5);
+    color: yellow;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-    color: rgba(0, 0, 0, 0.7);
+    color: yellow;
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
-    color: rgba(0, 0, 0, 0.3);
+    color: yellow;
 }
 
 .navbar-light .navbar-nav .show>.nav-link,
 .navbar-light .navbar-nav .active>.nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-    color: rgba(0, 0, 0, 0.9);
+    color: yellow;
 }
 
 .navbar-light .navbar-toggler {
-    color: rgba(0, 0, 0, 0.5);
+    color: yellow;
     border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -5040,16 +5049,16 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-text {
-    color: rgba(0, 0, 0, 0.5);
+    color: yellow;
 }
 
 .navbar-light .navbar-text a {
-    color: rgba(0, 0, 0, 0.9);
+    color: yellow;
 }
 
 .navbar-light .navbar-text a:hover,
 .navbar-light .navbar-text a:focus {
-    color: rgba(0, 0, 0, 0.9);
+    color: yellow;
 }
 
 .navbar-dark .navbar-brand {
@@ -5062,27 +5071,27 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.5);
+    color: yellow;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus {
-    color: rgba(255, 255, 255, 0.75);
+    color: yellow;
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled {
-    color: rgba(255, 255, 255, 0.25);
+    color: yellow;
 }
 
 .navbar-dark .navbar-nav .show>.nav-link,
 .navbar-dark .navbar-nav .active>.nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .nav-link.active {
-    color: #fff;
+    color: yellow;
 }
 
 .navbar-dark .navbar-toggler {
-    color: rgba(255, 255, 255, 0.5);
+    color: yellow;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -5091,16 +5100,16 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-text {
-    color: rgba(255, 255, 255, 0.5);
+    color: yellow;
 }
 
 .navbar-dark .navbar-text a {
-    color: #fff;
+    color: yellow;
 }
 
 .navbar-dark .navbar-text a:hover,
 .navbar-dark .navbar-text a:focus {
-    color: #fff;
+    color: yellow;
 }
 
 .card {
@@ -5114,7 +5123,8 @@ input[type="button"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: yellow;
+    ;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
