@@ -1,0 +1,8 @@
+MODULE CalibData
+    PERS tooldata Servo:=[TRUE,[[0,0,114.2],[1,0,0,0]],[0.215,[8.7,12.3,49.2],[1,0,0,0],0.00021,0.00024,0.00009]];
+    PERS tooldata Gripper:=[TRUE,[[0,-0.226,3866.059],[1,0,0,0]],[60,[0,0,200],[1,0,0,0],0,0,0]];
+    PERS tooldata Mi_mecanismo_1:=[TRUE,[[0,0,260],[1,0,0,0]],[60,[0,0,-280],[1,0,0,0],0,0,0]];
+    TASK PERS wobjdata pequeño:=[FALSE,TRUE,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+    TASK PERS wobjdata Mediano:=[FALSE,TRUE,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+    TASK PERS wobjdata Grande:=[FALSE,TRUE,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+ENDMODULE
