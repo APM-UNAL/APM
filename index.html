@@ -94,6 +94,7 @@
                                             <li><a href="#gemelo-section" class="nav-link">Gemelo Dígital</a></li>
 
                                             <li><a href="#grafcet-section" class="nav-link">Grafcet</a></li>
+                                            <li><a href="#testimonials-section" class="nav-link">Proceso de aprendizaje</a></li>
                                     </ul>
                                     </li>
 
@@ -739,7 +740,26 @@
 
                         <p> Para el montaje se plantean dos cilindros, los cuales serán encargados de mover las cajas por las diferentes bandas traspostadoras dependiendo del calibre o clasificación del fruto. El proceso de selección se basa en la fuerza
                             requerida por los cilindros y el recorrido, el cual es de 1 metro. </p>
-                        <img class="img-fluid " src="images/1.PNG ">
+
+
+
+
+                        <img class="img-fluid " src="images/seleccioncilindros.png ">
+
+                        <p>
+                            Con los parámetros calculados para diametro mínimo del vastago y la carrera requerida por los cilindros se han seleccionado los actuadores CD85 N20-1000CK y CD85 N25-1000CKK. Estos cilindros se encargarán de mover las cajas a determinadas bandas trasportadoras
+                            según el calibre del aguacate o pimentón. La activación de los cilindros se dará por la lectura de un sensor de color que hará el proceso de identificación al paso de las cajas.
+                        </p> <img class="img-fluid " src="images/cilindros.png " width="40%">
+                        </p>El siguiente elemento seleccionado es el compresor, para esta selección se parte del consumo total en condiciones noramles requerido por los cilindros, para este cálculo se han tenido en cuenta diversos factores como: perdidas
+                        de consumo, simultaneidada y seguridad; se parte del volumen requerido por cada actuador y el número de cilos por minuto de operación.
+                        </p>
+                        <img class="img-fluid " src="images/compresor.png ">
+                        <p>De los datos obtenidos se determina que el compresor adecuado es el NB5/5,5 FT/270 Nuair con una capacidad de 640 L/min de aspirado. En cuanto a las válvulas, los cilindros vástago simple de doble efecto requieren válvulas 5-2,
+                            en este caso con solenoide y capacidad de 8.2 BAR con conector VV5Q11-06S-D . </p>
+                        <img class="img-fluid " src="images/compreimg.PNG ">
+                        <p>Por último se seleccionaron los sensores de color, el sensor ideal debe poder adaptarse al PLC además de tomar lecturas claras y confiables de los colores RGB, azul rojo y verde, ya que la lógica de activación de los cilindros
+                            en Grafcet se basa en estas lecturas. Por ello se determinó que el sensor adecuado es el SI-COLO3</p>
+                        <img class="img-fluid " src="images/color.jpg " width="40%">
                     </div>
                 </div>
             </div>
@@ -756,11 +776,11 @@
                     <div class="row mb-3 "></div>
                     <div class="col-12 text-center " data-aos="fade ">
                         <img class="img-fluid " src="images/Canvas.png ">
-                        <img class="img-fluid " src="images/data.PNG ">
-                        <img class="img-fluid " src="images/op1.PNG ">
-                        <img class="img-fluid " src="images/op12.PNG ">
-                        <img class="img-fluid " src="images/op2.PNG ">
-                        <img class="img-fluid " src="images/op22.PNG ">
+                        <img class="img-fluid " src="images/imagen2.png ">
+                        <img class="img-fluid " src="images/imagen3.png ">
+                        <img class="img-fluid " src="images/imagen4.png ">
+                        <img class="img-fluid " src="images/imagen5.PNG ">
+                        <img class="img-fluid " src="images/imagen6.png ">
                     </div>
                 </div>
             </div>
@@ -868,7 +888,7 @@
                         <p>Teniendo en cuenta que se plantea recoger un grupo de 8 cajas con un peso máximo por caja de 13 kg, se tiene que el robot debe ser capaz de levantar 104kg en cajas mas el peso del gripper, que tiene un peso aproximado de 50kg,
                             además la máxima distancia alcanzable por el robot es de 2.75m; teniendo esto en cuenta esto, se tienen 2 opciones posibles en ABB, IRB660-180/315, y el IRB660-250/315. Para definir cual es la mejor opción se hizo uso de la
                             aplicación Robot Load, en la que se tuvieron en cuenta tanto os centros de masa del gripper como los de las cajas, y sus pesos; se obtuvo que para el robot IRB-180/315 se supera la capacidad de carga mientras para el IRB-250/315
-                            no se excede la capacidad de carga, por ello el robot seleccionado fue el IRB-250/315</p>
+                            no se excede la capacidad de carga, por ello el robot seleccionado fue el IRB-250/3.15.</p>
                     </div>
                 </div>
 
@@ -961,6 +981,92 @@
 
         </section>-->
 
+        <!-- Aqui inicia la sección proceso -->
+        <section class="site-section testimonial-wrap " id="testimonials-section" data-aos="fade ">
+            <div class="container ">
+                <div class="row mb-5 ">
+                    <div class="col-12 text-center ">
+                        <h2 class="section-title mb-3 ">Proceso de aprendizaje</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-one-item home-slider owl-carousel ">
+                <div>
+                    <div class="testimonial ">
+
+                        <blockquote class="mb-5 ">
+                            <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi
+                                earum unde iusto.&rdquo;</p>
+                        </blockquote>
+
+                        <figure class="mb-4 d-flex align-items-center justify-content-center ">
+                            <div><img src="images/person_7.jpg " alt="Image " class="w-50 img-fluid mb-3 "></div>
+                            <p>Luis Antonio Zuluaga</p>
+                        </figure>
+                    </div>
+                </div>
+                <div>
+                    <div class="testimonial ">
+
+                        <blockquote class="mb-5 ">
+                            <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi
+                                earum unde iusto.&rdquo;</p>
+                        </blockquote>
+                        <figure class="mb-4 d-flex align-items-center justify-content-center ">
+                            <div><img src="images/person_6.jpg " alt="Image " class="w-50 img-fluid mb-3 "></div>
+                            <p>Francisco José Lousada</p>
+                        </figure>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="testimonial ">
+
+                        <blockquote class="mb-5 ">
+                            <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi
+                                earum unde iusto.&rdquo;</p>
+                        </blockquote>
+                        <figure class="mb-4 d-flex align-items-center justify-content-center ">
+                            <div><img src="images/person_8.jpg " alt="Image " class="w-50 img-fluid mb-3 "></div>
+                            <p>Brian Camilo Valencia</p>
+                        </figure>
+
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="testimonial ">
+
+                        <blockquote class="mb-5 ">
+                            <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi
+                                earum unde iusto.&rdquo;</p>
+                        </blockquote>
+                        <figure class="mb-4 d-flex align-items-center justify-content-center ">
+                            <div><img src="images/juancho.jpg " alt="Image " class="w-50 img-fluid mb-3 "></div>
+                            <p>Juan Ramirez</p>
+                        </figure>
+
+                    </div>
+                    <div class="testimonial ">
+
+                        <blockquote class="mb-5 ">
+                            <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi
+                                earum unde iusto.&rdquo;</p>
+                        </blockquote>
+                        <figure class="mb-4 d-flex align-items-center justify-content-center ">
+                            <div><img src="images/person_5.jpg " alt="Image " class="w-50 img-fluid mb-3 "></div>
+                            <p>Felipe Medina</p>
+                        </figure>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- Aqui termina la sección proceso -->
+
         <!-- Aqui inicia la sección profesores -->
 
         <section class="site-section " id="docentes">
@@ -1034,7 +1140,7 @@
        
         <!-- Aqui termina la sección profesores -->
 
-
+        
 
 
  <!-- 
