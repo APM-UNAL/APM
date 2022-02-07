@@ -83,11 +83,13 @@
 
                                                 <li><a href="#fases">Etapas del proceso optimizado</a></li>
                                             </ul>
-                                            <li><a href="#plan" class="nav-link">Planeacion</a></li>
+                                            <li><a href="#plan-section" class="nav-link">Planeacion</a></li>
                                             <li><a href="#actuadores" class="nav-link">Sensores y Actuadores</a></li>
                                             <li><a href="#eco" class="nav-link">Evaluación Económica</a></li>
                                             <li><a href="#celdas-section" class="nav-link">Celda Robotizada</a></li>
+                                            <li><a href="#ind-section" class="nav-link">Industria 4.0</a></li>
                                             <li><a href="#grafcet-section" class="nav-link">Gemelo Dígital</a></li>
+
                                             <li><a href="#gemelo-section" class="nav-link">Grafcet</a></li>
                                     </ul>
                                     </li>
@@ -542,7 +544,7 @@
                             esta maquina con un poco menos de la capacidad de producción máxima a la que trabaja, con el fin de mantener en operación a capacidad máxima las etapas de lavado, secado y encerado, en donde se forman pequeñas colas debido
                             al porcentaje de falla, pero es algo que no afecta mucho al proceso de producción; además los tiempos de espera que se encuentran en la etapa posterior a la clasificación siguen siendo grandes. Por último, la etapa de paletizado
                             es ahora desarrollado por una única maquina que recolecta y organiza las cajas en diferentes pallets según su calibre, optimizando este proceso y disminuyendo la cantidad de trabajadores requeridos en esta etapa.</p>
-                        <h5 style="font-weight: bold; color: black;">Resultados del optmizado actual del Pimenton</h5>
+                        <h5 style="font-weight: bold; color: black;">Resultados del optmizado</h5>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/8.PNG ">
                         </div>
@@ -685,6 +687,27 @@
         </section>
         <!-- Aqui termina la sección  gestion de produccion -->
 
+        <section class="site-section " id="plan-section">
+            <div class="container ">
+
+                <div class="row mb-3 ">
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <h2 class="section-title mb-3 ">Planeación</h2>
+                        <p>
+                            Se plantea el siguiente calendario para el desarrollo de las actividades relacionadas al proyecto:
+                        </p>
+                        <div class="container" data-aos="fade-up" date-aos-delay="200">
+                            <img class="img-fluid " src="images/carlos.jpg ">
+                        </div>
+
+                    </div>
+
+
+
+
+
+        </section>-->
+
         <!-- Aqui inicia la sección actuadores -->
         <section class="site-section" id="actuadores">
             <div class="container ">
@@ -696,14 +719,49 @@
                     <div class="row mb-3 "></div>
                     <div class="col-12 text-center " data-aos="fade ">
 
-                        <p> Se plantea un calendario para el desarrollo del proyecto</p>
+                        <p> Para el montaje se plantean dos cilindros, los cuales serán encargados de mover las cajas por las diferentes bandas traspostadoras dependiendo del calibre o clasificación del fruto. El proceso de selección se basa en la fuerza
+                            requerida por los cilindros y el recorrido, el cual es de 1 metro. </p>
                         <img class="img-fluid " src="images/1.PNG ">
                     </div>
                 </div>
             </div>
         </section>
         <!-- Aqui termina la sección actuadores -->
-        <section class="site-section " id="grafcet-section">
+
+        <section class="site-section " id="ind-section">
+            <div class="container ">
+
+                <div class="row mb-3 ">
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <h2 class="section-title mb-3 ">Industria 4.0</h2>
+                        <p>
+                            Como propuesta en cuantoa industria 4.0 se montó un servidor de google en la nube, en donde se tiene un servidor de ignition, en este servidor se realiza una interfaz humano maquina que muestra y permite interactuar con las variables del proyecto, que
+                            están hosteadas en 3 computadores diferentes, dependiendo el software que se necesitaba. </p>
+                        <p>
+                            Por un lado tenemos en la capa de control, una instancia local que conecta variables en el software Studio5000 a la nube, esto se hace a traves de ignition usando los estandares OPC DA, con este mismo tipo de conexión se tiene en el piso de sensores y
+                            actuadores, un gemelo digital de la celda robotizada ubicado en RobotStudio, y en este mismo piso pero usando los estandares de comunicación OPC UA, tenemos un gemelo digital del proceso desde que llega el material, hasta que
+                            se va a la celda robotizada empacado en cajas de acuerdo a su tamaño.
+                        </p>
+                        div class="col-12 text-center" data-aos="fade">
+
+                        <img class="img-fluid " src="images/ind4.jpg ">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-12 text-center" data-aos="fade">
+                <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
+                <img class="img-fluid " src="images/robot.PNG ">
+            </div>
+
+
+        </section>-->
+
+
+        <section class="site-section " id="gemelo-section">
             <div class="container ">
 
                 <div class="row mb-3 ">
@@ -719,19 +777,21 @@
                                     <div class="card-body" style="text-align:center;">
                                         <h5 class="card-title">Video Simulación Gemelo Dígital</a>
                                         </h5>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/MAQQLn1V5gM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
+                </div>
 
 
-                    <div class="col-12 text-center" data-aos="fade">
-                        <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
-                        <img class="img-fluid " src="images/robot.PNG ">
-                    </div>
+
+                <div class="col-12 text-center" data-aos="fade">
+                    <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
+                    <img class="img-fluid " src="images/robot.PNG ">
+                </div>
 
 
         </section>-->
@@ -758,9 +818,6 @@
             </div>
         </section>
         <!-- Aqui termina la sección propuesta economica -->
-
-
-
         <!-- Aqui inicia la sección celda robotizada -->
         <section class="site-section " id="celdas-section">
 
@@ -776,7 +833,7 @@
                 </div>
                 <div>
                     <iframe src="diagrama.pdf#toolbar=1 " width="100% " height="500px ">
-                    </iframe>
+            </iframe>
 
                 </div>
                 <div class="col-12 text-center" data-aos="fade">
@@ -864,38 +921,10 @@
         <!-- Aqui termina  la sección celda robotizada -->
 
 
-        <section class="site-section " id="grafcet-section">
-            <div class="container ">
-
-                <div class="row mb-3 ">
-                    <div class="col-12 text-center " data-aos="fade ">
-                        <h2 class="section-title mb-3 ">Gemelo Dígital</h2>
-                        <p>
-                            Para el gemelo digital, se implementa la primera sección de la planta (Lavado, Secado, Encerado y clasificación) en NX MCD, Se armo la planta usando modelos CAD de Maquinas reales, pero debido a los requerimientos tan altos para simularla, se realizo
-                            una version simplificada, con la que se pudieran manejar las mismas señales y se tubiera la misma geometría, pero que nos permitiera simular de manera adecuada el gemelo digital.
-                        </p>
-                        <div class="container" data-aos="fade-up" date-aos-delay="200">
-                            <div class="colim">
-                                <div class="card">
-                                    <div class="card-body" style="text-align:center;">
-                                        <h5 class="card-title">Video Simulación Gemelo Dígital</a>
-                                        </h5>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
 
 
 
-                    <div class="col-12 text-center" data-aos="fade">
-                        <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
-                        <img class="img-fluid " src="images/robot.PNG ">
-                    </div>
 
-
-        </section>-->
 
         <section class="site-section " id="gemelo-section">
             <div class="container ">
@@ -996,6 +1025,39 @@
                 </div>
             </div>
         </section>
+
+        <section class="site-section " id="grafcet-section">
+            <div class="container ">
+
+                <div class="row mb-3 ">
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <h2 class="section-title mb-3 ">Gemelo Dígital</h2>
+                        <p>
+                            Para el gemelo digital, se implementa la primera sección de la planta (Lavado, Secado, Encerado y clasificación) en NX MCD, Se armo la planta usando modelos CAD de Maquinas reales, pero debido a los requerimientos tan altos para simularla, se realizo
+                            una version simplificada, con la que se pudieran manejar las mismas señales y se tubiera la misma geometría, pero que nos permitiera simular de manera adecuada el gemelo digital.
+                        </p>
+                        <div class="container" data-aos="fade-up" date-aos-delay="200">
+                            <div class="colim">
+                                <div class="card">
+                                    <div class="card-body" style="text-align:center;">
+                                        <h5 class="card-title">Video Simulación Gemelo Dígital</a>
+                                        </h5>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-12 text-center" data-aos="fade">
+                        <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
+                        <img class="img-fluid " src="images/robot.PNG ">
+                    </div>
+
+
+        </section>-->
 
         <!-- Aqui termina la sección profesores -->
 
