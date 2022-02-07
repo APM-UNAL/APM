@@ -739,8 +739,19 @@
 
                     <div class="row mb-3 "></div>
                     <div class="container" data-aos="fade ">
-                        <p> Para el montaje se plantean dos cilindros, los cuales serán encargados de mover las cajas por las diferentes bandas traspostadoras dependiendo del calibre o clasificación del fruto. El proceso de selección se basa en la fuerza
-                            requerida por los cilindros y el recorrido, el cual es de 1 metro. </p>
+                        <p> Se identificó una etapa adecuada para la implementación de sensores y actuadores de automatización, esta etapa es la bifurcación según la clasificación de los productos en las bandas transportadoras correspondientes hacia la celda
+                            de manufactura robótica. Adicionalmente existe otra etapa que utiliza únicamente sensores como condiciones de transición y comunicación entre el PLC y el robot en la celda de manufactura robótica. Este sensor corresponde a
+                            uno de presencia, infrarrojo.
+
+                        </p>
+                        <h3>Selección de una de las etapas y creación de una solución con actuadores aplicando todos los procedimientos del diseño.
+                        </h3>
+                        <p>La forma de identificación de cada clasificación de los productos se da según un código de colores, en donde las cajas que contienen frutos denominados como pequeños son de color verde, mientras que los medianos son azul y los
+                            grandes rojos. La selección de los actuadores se dio en función del tamaño y peso de las cajas y velocidad de reacción necesario. Tras sopesar diferentes posibles soluciones se encontró que la más adecuada para la aplicación
+                            son los actuadores neumáticos, cilindros. Para el montaje se plantean dos cilindros, los cuales serán encargados de mover las cajas por las diferentes bandas traspostadoras dependiendo del calibre o clasificación del fruto.
+                            El proceso de selección se basa en la fuerza requerida por los cilindros y el recorrido, el cual es de 1 metro.
+                        </p>
+
                     </div>
 
                     <div class="col-12 text-center " data-aos="fade ">
@@ -775,14 +786,32 @@
 
                     </div>
                     <div class="container" data-aos="fade ">
-                        <p>Por último se seleccionaron los sensores de color, el sensor ideal debe poder adaptarse al PLC además de tomar lecturas claras y confiables de los colores RGB, azul rojo y verde, ya que la lógica de activación de los cilindros
+                        <p>A continnuación seleccionaron los sensores de color, el sensor ideal debe poder adaptarse al PLC además de tomar lecturas claras y confiables de los colores RGB, azul rojo y verde, ya que la lógica de activación de los cilindros
                             en Grafcet se basa en estas lecturas. Por ello se determinó que el sensor adecuado es el SI-COLO3</p>
 
                     </div>
                     <div class="col-12 text-center " data-aos="fade ">
                         <img class="img-fluid " src="images/color.jpg " width="40%">
                     </div>
+                    <p>
+                        Por último, el sensor de presencia es un sensor infrarrojo que detecta cuando una caja ha llegado al final de la banda transportadora y ha sido colocada correctamente en el pallet por la máquina organizadora. Este sensor es el sensor infrarrojo E18-D80NK-N
+                        capaz de detectar la presencia de elementos ubicados entre 6 y 80 cm, lo suficientemente ancho como para abarcar el ancho de la banda transportadora. Opera con un voltaje de alimentación de 5V, consumo de corriente inferior a 25mA
+                        y tiempo de respuesta inferior a 2m.
+                    </p>
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <img class="img-fluid " src="images/infr.png " width="40%">
+                    </div>
 
+                    <h3 style="font-weight: bold;color: teal">Diagrama Neumático</h3>
+                    <p>Se presenta el diagrama neumático de los actuadores del proceso, se tienen dos cilindros los cuales se activan por la lectura de sensores de color a través de programación en grafcet. </p>
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <img class="img-fluid " src="images/neum.PNG " width="70%">
+                    </div>
+                    <h3 style="font-weight: bold;color: teal">Diagrama Eléctrico</h3>
+                    En cuanto al diagrama eléctrico se tiene el PLC, se ajustan las entradas de los sensores de color y señales de control. Los solenoides se ajustan a la salida para cada cilindro y para este diagrama se ajustan 3 LEDs para indicar el estado de las señales.
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <img class="img-fluid " src="images/elec.PNG " width="90%">
+                    </div>
                 </div>
             </div>
             </div>
@@ -829,78 +858,139 @@
 
                 </div>
                 <div>
+                    <p>
+                        Después de analizar el estado actual del proceso industrial de empaquetado de pimentones y aguacates se encontró que no solo es mucho el tiempo que se pierde en actividades que no general valor como por ejemplo la espera, tiempos muertos, distracciones,
+                        desplazamientos, etc., sino que existen métodos más óptimos para desarrollar las mismas actividades pero en menos tiempo y con mayor calidad. Un factor importante que permite la introducción de robots en el proceso industrial es
+                        la presencia de actividades repetitivas, que no requieren de la alta capacidad cognitiva de un ser humano y que pueden ser desarrolladas más rápidamente. Esta etapa consiste en el armado de los pallets, actividad fácilmente robotizable
+                        dada la gran cantidad de casos de éxito que existen en la industria.
+                    </p>
                     <iframe src="diagrama.pdf#toolbar=1 " width="100% " height="500px ">
-            </iframe>
+                    </iframe>
+                    <p>El principal valor agregado al utilizar una celda de manufactura robotizada para esta etapa es la reducción de riesgos y peligros para los trabajadores al operar con cajas que pesan entre 6 y 13 kg, aumento en la producción dado que
+                        puede operar de manera continua y prolongada.
+                    </p>
+                    <h3>Diseño de celda robotizada considerando relación con espacio, flujo de producto, interacción con personal, seguridad funcional y agarre del robot:</h3>
+                    <p>El segundo paso para el diseño de la celda de manufactura robotizada consiste en el análisis de las etapas, eliminación de residuos e identificación de oportunidades de mejora, de esta forma se evita replicar actividades no productivas
+                        en la planta nueva. Se parte por el flujo de producto, se determinan el objetivo de cada etapa y las métricas correspondientes, que tanta interacción con operarios requiere, nivel de seguridad dada una lista de posibles riesgos
+                        y peligros.</p>
 
+                    <p>Este análisis permitió encontrar no solo cuales etapas manuales son automatizables sino que también una mejor distribución del espacio de trabajo que beneficie la interacción humano máquina, disminuya errores, peligros y accidentes,
+                        desplazamientos y tiempos de espera. El layout propuesto para el proceso optimizado es el siguiente</p>
                 </div>
                 <div class="col-12 text-center" data-aos="fade">
                     <h3 style="font-weight: bold; color: black;">Layout general</h3>
                     <img class="img-fluid " src="images/layout.PNG ">
+                </div>
+                <p>
+                    En análisis de las etapas del flujo de proceso indican que se consigue disminuir los riesgos y peligros a los que están expuestos los trabajadores. Puntualmente, al automatizar el volcado de las cestas se evita el sobreesfuerzo de la zona lumbar y la
+                    cercanía a ambientes con material particulado. La clasificación ahora es un proceso más eficaz dado que se produce de manera estandarizada y no a criterio del trabajador.
+                </p>
+                <p>Con la implementación de la celda de manufactura en el proceso de paletizado se incluye un riesgo y peligro mucho mayor al presente anteriormente, esto se debe a la presencia de un robot de gran tamaño y fuerza manipulando grandes cargas.
+                    Algunos de los riesgos son:</p>
+                <ul>
+                    <li> Funcionamiento anormal de la celda.
+                    </li>
+                    <li> Ingreso de personal en la celda robótica.</li>
+                    <li>Caida de las cajas</li>
+                </ul>
+                <p>
+                    Esto hace obligatorio establecer medidas de seguridad adicionales completamente necesarias según la norma ISO 13849, como por ejemplo barreras físicas que eviten la entrada de personas a la celda que puedan interferir con el movimiento del robot y/o la
+                    carga causando daños en la salud y bienestar de los trabajadores, del robot y la carga. También se incluyen botones de paradas de emergencia en 3 puntos de la celda, junto con señales visuales y sonoras para indicar cuando la celda
+                    está en operación y/o cuando se presenta alguna situación que represente peligro.
+                </p>
+                <p>
+                    El layout de la celda de manufactura robótica se pensó en que fuera un espacio cerrado, con 3 líneas de entrada de cajas y 1 de salida.
+                </p>
+                <div class="col-12 text-center" data-aos="fade">
                     <h3 style="font-weight: bold; color: black;">Celda robotizada</h3>
                     <img class="img-fluid " src="images/celdarrrrrrr.jpg " width="70%">
                 </div>
 
+                <p>
+                    La selección del robot se hizo bajo los criterios de área de trabajo dispuesto, grados de libertad requeridos, error de posición y de trayectoria permisible, velocidad y aceleración de las articulaciones, fuerza de agarre y carga máxima.
+                </p>
 
-                <div class="container">
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-md-7 text-center">
+                        <h3 style="font-weight: bold; color: black;">Selección robot y gripper</h3>
 
-                    <div class="row mb-5 justify-content-center">
-                        <div class="col-md-7 text-center">
-                            <h3 style="font-weight: bold; color: black;">Pallets y empaque</h3>
-                            <img src="images/general.PNG" alt="Image" class="img-fluid">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-
-                            <div class="owl-carousel slide-one-item-alt">
-                                <img src="images/pallpimenton.PNG" alt="Image" class="img-fluid">
-                                <img src="images/pallaguacate.PNG" alt="Image" class="img-fluid">
-
-                            </div>
-                            <div class="custom-direction">
-                                <a href="#" class="custom-prev"><span><span class="icon-keyboard_backspace"></span></span></a><a href="#" class="custom-next"><span><span class="icon-keyboard_backspace"></span></span></a>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-
-                            <div class="owl-carousel slide-one-item-alt-text">
-                                <div>
-                                    <h2 class="section-title mb-3" style="color:rgb(221, 33, 33)">Pallet Pimentón</h2>
-                                    <p class="lead">Para el paletizado del pimentón se selecciona el siguiente modelo:</p>
-                                    <ul class="list-unstyled ul-check success mb-5 ">
-
-                                        <li>Dimensiones de la caja [cm] = 42.5x32.5x18</li>
-                                        <li>Cantidad aguacates por caja (G/P): 42-48/ 60-70</li>
-                                        <li>Peso por caja (G/P): 8kg / 7.8kg</li>
-
-                                    </ul>
-                                    <p class="lead">Donde G = Grande y P = Pequeño</p>
-                                </div>
-                                <div>
-                                    <h2 class="section-title mb-3" style="color:rgb(21, 114, 12)">Pallet Aguacate</h2>
-                                    <p class="lead">Para el paletizado del aguacate se selecciona el siguiente modelo:</p>
-                                    <ul class="list-unstyled ul-check success mb-5 ">
-
-                                        <li>Dimensiones de la caja [cm] = 42.5x32.5x18</li>
-                                        <li>Cantidad aguacates por caja (G/P): 35-40/ 20-25</li>
-                                        <li>Peso por caja (G/P): 13kg / 6.7kg</li>
-
-                                    </ul>
-                                    <p class="lead">Donde G = Grande y P = Pequeño</p>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
+                <p>Teniendo en cuenta que se plantea recoger un grupo de 8 cajas con un peso máximo por caja de 13 kg, se tiene que el robot debe ser capaz de levantar 104kg en cajas mas el peso del gripper, que tiene un peso aproximado de 50kg, además la
+                    máxima distancia alcanzable por el robot es de 2.75m; teniendo esto en cuenta esto, se tienen 2 opciones posibles en ABB, IRB660-180/315, y el IRB660-250/315. Para definir cual es la mejor opción se hizo uso de la aplicación Robot
+                    Load, en la que se tuvieron en cuenta tanto os centros de masa del gripper como los de las cajas, y sus pesos; se obtuvo que para el robot IRB-180/315 se supera la capacidad de carga mientras para el IRB-250/315 no se excede la capacidad
+                    de carga, por ello el robot seleccionado fue el IRB-250/3.15.
+                </p>
 
+
+                <div class="col-12 text-center " data-aos="fade ">
+                    <img class="img-fluid " src="images/luisss.jpg " width="900">
+                </div>
                 <div class="col-12 text-center" data-aos="fade">
                     <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
                     <img class="img-fluid " src="images/robot.PNG ">
                 </div>
+                <h4>Información Adicional:</h4>
+                <ul>
+                    <li> <a href="https://search.abb.com/library/Download.aspx?DocumentID=9AKK107045A8446&LanguageCode=en&DocumentPartId=&Action=Launch">Brochure </a> </li>
+                    <li> <a href="https://abb.sluzba.cz/Pages/Public/IRC5RoboticsDocumentationRW6/Robots/Articulated%20Robots/IRB%20660/es/3HAC025755-005.pdf">Manual de producto </a> </li>
+                    <li> <a href="https://abb.sluzba.cz/Pages/Public/IRC5RoboticsDocumentationRW6/Robots/Articulated%20Robots/IRB%20660/en/3HAC023932-001.pdf">Product specification </a> </li>
+                </ul>
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-md-7 text-center">
+                        <h3 style="font-weight: bold; color: black;">Pallets y empaque</h3>
+                        <img src="images/general.PNG" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
+
+                        <div class="owl-carousel slide-one-item-alt">
+                            <img src="images/pallpimenton.PNG" alt="Image" class="img-fluid">
+                            <img src="images/pallaguacate.PNG" alt="Image" class="img-fluid">
+
+                        </div>
+                        <div class="custom-direction">
+                            <a href="#" class="custom-prev"><span><span class="icon-keyboard_backspace"></span></span></a><a href="#" class="custom-next"><span><span class="icon-keyboard_backspace"></span></span></a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
+
+                        <div class="owl-carousel slide-one-item-alt-text">
+                            <div>
+                                <h2 class="section-title mb-3" style="color:rgb(221, 33, 33)">Pallet Pimentón</h2>
+                                <p class="lead">Para el paletizado del pimentón se selecciona el siguiente modelo:</p>
+                                <ul class="list-unstyled ul-check success mb-5 ">
+
+                                    <li>Dimensiones de la caja [cm] = 42.5x32.5x18</li>
+                                    <li>Cantidad aguacates por caja (G/P): 42-48/ 60-70</li>
+                                    <li>Peso por caja (G/P): 8kg / 7.8kg</li>
+
+                                </ul>
+                                <p class="lead">Donde G = Grande y P = Pequeño</p>
+                            </div>
+                            <div>
+                                <h2 class="section-title mb-3" style="color:rgb(21, 114, 12)">Pallet Aguacate</h2>
+                                <p class="lead">Para el paletizado del aguacate se selecciona el siguiente modelo:</p>
+                                <ul class="list-unstyled ul-check success mb-5 ">
+
+                                    <li>Dimensiones de la caja [cm] = 42.5x32.5x18</li>
+                                    <li>Cantidad aguacates por caja (G/P): 35-40/ 20-25</li>
+                                    <li>Peso por caja (G/P): 13kg / 6.7kg</li>
+
+                                </ul>
+                                <p class="lead">Donde G = Grande y P = Pequeño</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
 
                 <div class="container" data-aos="fade-up" date-aos-delay="200">
                     <div class="colim">
@@ -908,15 +998,11 @@
                             <div class="card-body" style="text-align:center;">
                                 <h5 class="card-title">Video Simulación Robot Studio</a>
                                 </h5>
+                                <p>En el video siguiente se muestra la simulación del funcionamiento de la celda de manufactura robotizada:
+                                </p>
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/KMgGAVBOuLY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                </div>
-                            <div class="col-12 text-center " data-aos="fade ">
-                                <img class="img-fluid " src="images/luisss.jpg " width="900">
-                            </div>
+
                         </div>
-                        <p>Teniendo en cuenta que se plantea recoger un grupo de 8 cajas con un peso máximo por caja de 13 kg, se tiene que el robot debe ser capaz de levantar 104kg en cajas mas el peso del gripper, que tiene un peso aproximado de 50kg,
-                            además la máxima distancia alcanzable por el robot es de 2.75m; teniendo esto en cuenta esto, se tienen 2 opciones posibles en ABB, IRB660-180/315, y el IRB660-250/315. Para definir cual es la mejor opción se hizo uso de la
-                            aplicación Robot Load, en la que se tuvieron en cuenta tanto os centros de masa del gripper como los de las cajas, y sus pesos; se obtuvo que para el robot IRB-180/315 se supera la capacidad de carga mientras para el IRB-250/315
-                            no se excede la capacidad de carga, por ello el robot seleccionado fue el IRB-250/3.15.</p>
                     </div>
                 </div>
 
