@@ -84,6 +84,7 @@
                                                 <li><a href="#fases">Etapas del proceso optimizado</a></li>
                                             </ul>
                                             <li><a href="#plan" class="nav-link">Planeacion</a></li>
+                                            <li><a href="#actuadores" class="nav-link">Sensores y Actuadores</a></li>
                                             <li><a href="#eco" class="nav-link">Evaluación Económica</a></li>
                                             <li><a href="#celdas-section" class="nav-link">Celda Robotizada</a></li>
                                             <li><a href="#grafcet-section" class="nav-link">Gemelo Dígital</a></li>
@@ -416,6 +417,15 @@
                         <h2 class="section-title mb-3 ">Gestión de producción</h2>
                         <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
                             un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual.</p>
+                        <p>
+                            Para este análisis se utilizo el software Tecnomatix Plant simulation, con el cual se puede simular el proceso productivo de una planta y obtener algunos de KPI importantes. Para ello se realizó una investigación de procesos actuales relacionados la clasificación
+                            y empaque de aguacates y pimentones, de donde se encontró que la mayoría de las plantas cuentan con maquinas como bandas transportadoras, maquinas de lavado y máquinas de clasificación de vegetales, por otro lado también se
+                            encontró que en menor medida se tienen plantas con los procesos de lavado y secado; por último se encontró que las etapas de volcado, empaque y paletizado son realizadas por operarios. Además de estas características, se utilizaron
+                            videos como base para tomar tiempos de las diferentes etapas del proceso, lo que nos sería útil al momento de ingresar datos en el simulador. Posterior a esta búsqueda se realizaron diferentes actividades como reuniones, lluvias
+                            de ideas, investigación externa y otros procesos creativos para proponer una solución de automatización que mejore el rendimiento de los procesos actuales. A continuación, se muestran los análisis y resultados obtenidos al
+                            realizar las simulaciones:
+                        </p>
+
                         <h5 style="color: black;"> Diagramas de Value Stream Mapping VSM para el proceso actual y para el proceso automatizado.</h5>
                     </div>
 
@@ -423,21 +433,30 @@
                     <div class="container " id="pim">
                         <h3 style="font-weight: bold; color:rgb(221, 33, 33)">Proceso actual del pimentón</h3>
                         <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
-                            un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual.</p>
+                            un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual. En el siguiente diagrama VSM se puede observar el proceso sin automatizar analizado
+                            para clasificación y empaque de pimentón, del material consultado, se tiene que esta planta cuenta con los procesos de: Volcado manual, lavado, secado, separación, empaque manual en cajas, paletizado manual.</p>
                         <div class="row mb-3 "></div>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/1.PNG ">
 
                         </div>
-                        <h5 style="font-weight: bold; color: black;">Planta de proceso actual del pimentón</h5>
+                        <p>
+                            Se tiene en cuenta que el proceso inicia al ingresar canastas plásticas con aguacate proveniente del campo, estas canastas traen un peso aproximado de 13kg. Por otro lado, se tomaron tiempos de cada proceso a partir de videos encontrados en internet.
+                        </p>
+                        <h5 style="font-weight: bold; color: crimson;">Simulación propuesta de automatización:</h5>
                         <p>El proceso actual del pimentón consta de 5 etapas,de las cuales 3 de ellas son llevadas a cavo por un operario que son: volcado, empaque y paletizado y las 2 etapas restantes son: lavado y clasificado por tamaño que son semiautomatizadas.
-                            Esto genera que la producción no sea optima y que la fruta no se encuentre en el mejor estado al final del proceso.</p>
+                            Esto genera que la producción no sea optima y que la fruta no se encuentre en el mejor estado al final del proceso. Teniendo claro el flujo de material, los procesos involucrados, tiempos y pesos aproximados, se procede a realizar
+                            una simulación en el software Tecnomatix Plantsimulation. En la siguiente imagen se puede observar el layout del proceso, </p>
+
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/2.PNG ">
                         </div>
-                        <h5 style="font-weight: bold; color: black;">Resultados del proceso actual del pimentón</h5>
+
                         <p>En el gráfico se puede observar que el proceso tiene muchos tiempos de espera, esto puede ser debido a que el proceso se realiza en gran parte de forma manual, lo cual disminuye la productividad en comparación a un proceso completamente
-                            automatizado. Ya que las personas pueden verse afectadas por diferentes factores como distracciones y el trabajo ejercido por un operario no es constante.</p>
+                            automatizado. Ya que las personas pueden verse afectadas por diferentes factores como distracciones y el trabajo ejercido por un operario no es constante. Al igual que para el proceso del aguacate se observan bastantes tiempos
+                            de espera, pero además en este caso se observa que las maquinas no se están usando a su máxima capacidad, esto debido que el pimentón cuenta con un menor peso por volumen que el aguacate; También se puede observar que los procesos
+                            realizados por operarios pueden generar una mayor cantidad de fallas, afectando directamente en la generación de colas, pero debido a que se cuenta con muchos tiempos de espera, esto no genera cuellos de botella que afecten
+                            el proceso.</p>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/3.PNG ">
                         </div>
@@ -449,26 +468,35 @@
                     <div class="container " id="agu">
                         <h3 style="font-weight: bold;color:rgb(21, 114, 12)">Proceso actual del Aguacate</h3>
                         <p>
-                            A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea un proceso optimizado con
-                            el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual.
+                            En el siguiente diagrama VSM se puede observar el proceso sin automatizar analizado para clasificación y empaque de aguacates, del material consultado, se tiene que esta planta cuenta con los procesos de: Volcado manual, lavado, secado, encerado, separación,
+                            empaque en cajas manual, paletizado manual. Se tiene en cuenta que el proceso inicia al ingresar canastas plásticas con aguacate proveniente del campo, estas canastas traen un peso aproximado de 17kg. Por otro lado, se tomaron
+                            tiempos de cada proceso a partir de videos encontrados en internet.
 
                         </p>
+
                         <div class="row mb-3 "></div>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/4.PNG ">
 
                         </div>
-                        <h5 style="font-weight: bold; color: black;">Planta de proceso actual del Aguacate</h5>
-                        <p>El proceso actual del pimentón consta de 6 etapas,de las cuales 3 de ellas son llevadas a cavo por un operario que son: volcado, empaque y paletizado y las 3 etapas restantes son: lavado, encerado y clasificado por tamaño que son
-                            semiautomatizadas. Esto genera que la producción no sea optima y que la fruta no se encuentre en el mejor estado al final del proceso.</p>
+                        <h3 style="color:rgb(21, 114, 12)"> Simulación proceso actual del aguacate sin automatizar: </h3>
+                        <p>El proceso actual del aguacate consta de 6 etapas,de las cuales 3 de ellas son llevadas a cavo por un operario que son: volcado, empaque y paletizado y las 3 etapas restantes son: lavado, encerado y clasificado por tamaño que son
+                            semiautomatizadas. Esto genera que la producción no sea optima y que la fruta no se encuentre en el mejor estado al final del proceso. Teniendo claro el flujo de material, los procesos involucrados, tiempos y pesos aproximados,
+                            se procede a realizar una simulación en el software Tecnomatix Plantsimulation. En la siguiente imagen se puede observar el layout del proceso.</p>
 
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/5.PNG ">
                         </div>
-                        <h5 style="font-weight: bold; color: black;">Resultados del proceso actual del Aguacate</h5>
+                        <p>De donde se obtuvieron los resultados que se muestran en el siguiente gráfico; se puede observar que el proceso cuenta con muchos tiempos de espera después de la etapa de clasificación, y esto se debe a que ingresa un gran volumen
+                            de materia prima pero este se divide en los diferentes calibres, aun cuando los tiempos de proceso para estas actividades son mas lentos, se tiene mucho menos material para procesar, de esto también se puede inferir que no
+                            es posible disminuir los tiempos de espera, ya que para ello es necesario aumentar la cantidad de aguacates que ingresan a la planta, y las maquinas con las que se cuentan están trabajando cerca de su máxima capacidad; por
+                            otro lado se puede observar que se cuenta con múltiples trabajadores en varias etapas del proceso, lo que genera un porcentaje de fallas mayor a las etapas implementadas con máquinas, disminuyendo la calidad del producto. </p>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/6.PNG ">
                         </div>
+                        <p>
+                            Por último, se obtuvieron los siguientes KPI para el proceso del aguacate sin automatizar, de donde se puede destacar que se tiene una capacidad de producción de 25.856 Kg/día, y un OEE de aproximadamente el 49%.
+                        </p>
 
                     </div>
                     <!-- Aqui termmina la sección Proceso actual del Aguacate -->
@@ -479,22 +507,52 @@
                         <div class="row mb-3 "></div>
                         <div class="col-12 text-center " data-aos="fade ">
                             <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
-                                un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual.</p>
+                                un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual. Para la propuesta de automatización se plantea implementar las siguientes etapas
+                                con el fin de mejorar la capacidad de producción del producto, y la calidad de este.</p>
+                            <ul>
+                                <li> Volcado automático</li>
+                                <li> Eliminación de desechos</li>
+                                <li> Lavado</li>
+                                <li> Secado</li>
+                                <li> Encerado</li>
+                                <li> Clasificación</li>
+                                <li> Empaque por operario</li>
+                                <li> Paletizado Automatizado (Celda robotizada)</li>
+                                <li> Enfardado para protección del pallet.</li>
+
+                            </ul>
+                            <p>Por otro lado, también se plantea una mima línea de proceso para ambos productos, los cuales se trabajarán en tiempos diferentes, es decir, cuando se este procesando aguacate, no se debe ingresar pimentón, y viceversa. Por
+                                otro lado, en la búsqueda de maquinaria del proceso, se consultaron maquinas con una capacidad de producción aproximada entre 8 y 10 ton/hora.</p>
+                            <p>
+                                Se tiene en cuenta que el proceso inicia al ingresar canastas plásticas con aguacate proveniente del campo, estas canastas traen un peso aproximado de 17kg. Por otro lado, se tomaron tiempos y capacidades de producción en cada etapa del proceso a partir
+                                de la información aportada por los fabricantes de las diferentes consultas realizadas. A continuación, se muestra el diagrama VSM del proceso automatizado planteado para ambos productos.
+                            </p>
+                            <img src="images/optm.png">
+                            <p>
+                                Teniendo claro el flujo de material, los procesos involucrados, tiempos y pesos aproximados, se procede a realizar una simulación en el software Tecnomatix Plantsimulation. En la siguiente imagen se puede observar el layout del proceso
+                            </p>
                         </div>
                         <h5 style="font-weight: bold; color: black;">Planta de proceso optimizado</h5>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/7.PNG ">
+                            <img class="img-fluid " src="images/poner.png ">
                         </div>
+                        <p>De los resultados obtenidos, se puede observar que el porcentaje de fallas disminuye, gracias a que se automatizaron algunas etapas que eran realizadas por operarios anteriormente. Por otro lado, se observa que posible que se cree
+                            un cuello de botella en la etapa de volcado, esto es debido a que las maquinas de volcado tienen una capacidad de producción elevada con respecto a las máquinas de las demás etapas del proceso, por lo que se piensa utilizar
+                            esta maquina con un poco menos de la capacidad de producción máxima a la que trabaja, con el fin de mantener en operación a capacidad máxima las etapas de lavado, secado y encerado, en donde se forman pequeñas colas debido
+                            al porcentaje de falla, pero es algo que no afecta mucho al proceso de producción; además los tiempos de espera que se encuentran en la etapa posterior a la clasificación siguen siendo grandes. Por último, la etapa de paletizado
+                            es ahora desarrollado por una única maquina que recolecta y organiza las cajas en diferentes pallets según su calibre, optimizando este proceso y disminuyendo la cantidad de trabajadores requeridos en esta etapa.</p>
                         <h5 style="font-weight: bold; color: black;">Resultados del optmizado actual del Pimenton</h5>
                         <div class="col-12 text-center " data-aos="fade ">
                             <img class="img-fluid " src="images/8.PNG ">
                         </div>
-                        <h5 style="font-weight: bold; color: black;">Resultados del optmizado actual del Aguacate</h5>
+                        <p>
+                            Por último, se obtuvieron los siguientes KPI para el proceso del aguacate sin automatizar, de donde se puede destacar que se tiene una capacidad de producción de 67560 Kg/día, y un OEE de aproximadamente el 68%. Esto muestra que la capacidad de producción
+                            de la planta aumenta en aproximadamente 2.6 veces con respecto al proceso anterior, y el OEE también aumenta en un gran porcentaje al proceso sin automatizar.
+                        </p>
                         <div class="col-12 text-center " data-aos="fade ">
-                            <img class="img-fluid " src="images/9.PNG ">
+                            <img class="img-fluid " src="images/fffffffffff.png ">
                         </div>
-
-
                     </div>
                     <!-- Aqui termmina la sección  Proceso optimizado -->
 
@@ -627,12 +685,12 @@
         </section>
         <!-- Aqui termina la sección  gestion de produccion -->
 
-        <!-- Aqui inicia la sección planeación -->
-        <section class="site-section" id="plan">
+        <!-- Aqui inicia la sección actuadores -->
+        <section class="site-section" id="actuadores">
             <div class="container ">
                 <div class="row mb-3 ">
                     <div class="col-12 text-center " data-aos="fade ">
-                        <h2 class="section-title mb-3 ">Planeación</h2>
+                        <h2 class="section-title mb-3 ">Sensores y Actuadores</h2>
                     </div>
 
                     <div class="row mb-3 "></div>
@@ -644,7 +702,40 @@
                 </div>
             </div>
         </section>
-        <!-- Aqui termina la sección planeación -->
+        <!-- Aqui termina la sección actuadores -->
+        <section class="site-section " id="grafcet-section">
+            <div class="container ">
+
+                <div class="row mb-3 ">
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <h2 class="section-title mb-3 ">Gemelo Dígital</h2>
+                        <p>
+                            Para el gemelo digital, se implementa la primera sección de la planta (Lavado, Secado, Encerado y clasificación) en NX MCD, Se armo la planta usando modelos CAD de Maquinas reales, pero debido a los requerimientos tan altos para simularla, se realizo
+                            una version simplificada, con la que se pudieran manejar las mismas señales y se tubiera la misma geometría, pero que nos permitiera simular de manera adecuada el gemelo digital.
+                        </p>
+                        <div class="container" data-aos="fade-up" date-aos-delay="200">
+                            <div class="colim">
+                                <div class="card">
+                                    <div class="card-body" style="text-align:center;">
+                                        <h5 class="card-title">Video Simulación Gemelo Dígital</a>
+                                        </h5>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-12 text-center" data-aos="fade">
+                        <h3 style="font-weight: bold; color: black;">Robot seleccionado</h3>
+                        <img class="img-fluid " src="images/robot.PNG ">
+                    </div>
+
+
+        </section>-->
+
 
         <!-- Aqui inicia la sección propuesta economica -->
         <section class="site-section" id="eco">
