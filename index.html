@@ -718,7 +718,7 @@
                             Se plantea el siguiente calendario para el desarrollo de las actividades relacionadas al proyecto:
                         </p>
                         <div class="container" data-aos="fade-up" date-aos-delay="200">
-                            <iframe src="gaant.pdf" width="100% " height="1000px ">
+                            <iframe src="gaant.pdf" width="100% " height="900px ">
                         </div>
 
                     </div>
@@ -886,7 +886,8 @@
                 <h3>Diseño de celda robotizada considerando relación con espacio, flujo de producto, interacción con personal, seguridad funcional y agarre del robot:</h3>
                 <p>El segundo paso para el diseño de la celda de manufactura robotizada consiste en el análisis de las etapas, eliminación de residuos e identificación de oportunidades de mejora, de esta forma se evita replicar actividades no productivas
                     en la planta nueva. Se parte por el flujo de producto, se determinan el objetivo de cada etapa y las métricas correspondientes, que tanta interacción con operarios requiere, nivel de seguridad dada una lista de posibles riesgos y peligros.</p>
-
+                <iframe src="Tablasfelipe.pdf" width="100% " height="500px ">
+                    </iframe>
                 <p>Este análisis permitió encontrar no solo cuales etapas manuales son automatizables sino que también una mejor distribución del espacio de trabajo que beneficie la interacción humano máquina, disminuya errores, peligros y accidentes, desplazamientos
                     y tiempos de espera. El layout propuesto para el proceso optimizado es el siguiente</p>
             </div>
@@ -1095,11 +1096,23 @@
                     <h2 class="section-title mb-3 ">Grafcet</h2>
                 </div>
                 <p>
-                    A continuación se presenta el Grafcet realizado en el software Studio-5000.
+                    Se realizó el código para el control automático de dos etapas del sistema de manufactura en GRAFCET y una en LADDER. La primera etapa consiste en el volcado automático de las cestas con los vegetales en la primera banda transportadora. Se programa con
+                    el fin de mantener un volumen de verduras de entrada constante. Para el control a través de Grafcet lo dividimos en dos componentes: uno relacionado con la división de las cajas por 3 tapetes según el calibre de las frutas que contienen
+                    y otro que controlará el resto de actuadores de la fábrica a través de los botones de Start y Stop. En el componente de Distribución tendremos dos etapas ejecutándose simultáneamente, una que poseerá 3 ramas, una para cada tipo de
+                    caja y una etapa que sólo esperará la parada para proceder a la desactivación del grafcet completo. Los cilindros neumáticos funcionarán en las 3 ramas y los contadores también se incrementarán para que podamos tener esta información
+                    en el SCADA
+                </p>
+                <iframe src="Grafcets-2.pdf" width="120% " height="1000px"></iframe>
+                <p>Las segunda etapa programada en GRAFCET es la identificación de las cajas y desviación hacia la banda transportadora de la celda de manufactura robótica correspondiente para el conformado de los pallets. Esta etapa hace uso de los cilindros
+                    neumáticos y sensores de color mencionados anteriormente.
                 </p>
                 <iframe src="Grafcets-1.pdf" width="120% " height="1000px"></iframe>
-                <iframe src="Grafcets-2.pdf" width="120% " height="1000px"></iframe>
 
+                <p>La etapa propuesta para el control de secuencia está en la banda transportadora que mueve las cajas hacia la celda de manufactura robótica ha sido programada en LADDER .Para la conformación de un nivel del pallet se utiliza una máquina
+                    organizadora, la cual las organiza tal y como se mostró el pallet en la sección correspondiente. Cuando se activa un cilindro se sabe que una caja viene por la banda transportadora correspondiente, por lo que se le indica a la máquina
+                    organizadora la posición en la que debe estar según la cantidad de cajas ya presentes en el pallet. Cada caja es contada con el fin se saber la posición en la que debe estar dentro del pallet. Cuando se tiene un nivel completo conformado
+                    se manda una señal al robot indicando que debe recoger las cajas. Para evitar perturbaciones de cajas entrando en este punto se detiene la banda transportadora, y cuando el robot indique que ya a recogido la caja se retoma el movimiento
+                    de la banda, se reinician los contadores y la máquina organizadora vuelve a su posición inicial.</p>
 
             </div>
 
