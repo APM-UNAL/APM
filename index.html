@@ -94,6 +94,7 @@
                                             <li><a href="#gemelo-section" class="nav-link">Gemelo Dígital</a></li>
 
                                             <li><a href="#grafcet-section" class="nav-link">Grafcet</a></li>
+                                            <li><a href="#scada-section" class="nav-link">SCADA</a></li>
                                             <li><a href="#testimonials-section" class="nav-link">Proceso de aprendizaje</a></li>
                                     </ul>
                                     </li>
@@ -430,12 +431,14 @@
 
         <!-- Aqui termina la sección Nuestro equipo -->
 
-        <!-- Aqui inicia la sección celda gestion de produccion -->
+        <!-- Aqui inicia la sección gestion de produccion -->
         <section class="site-section" id="production1">
             <div class="container ">
                 <div class="row mb-3 ">
                     <div class="col-12 text-center " data-aos="fade ">
                         <h2 class="section-title mb-3 ">Gestión de producción</h2>
+                    </div>
+                    <div class="container">
                         <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
                             un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual.</p>
                         <p>
@@ -451,7 +454,7 @@
                     </div>
 
                     <!-- Aqui inicia la sección Proceso actual del pimentón -->
-                    <div class="container " id="pim">
+                    <div class="container" id="pim">
                         <h3 style="font-weight: bold; color:rgb(221, 33, 33)">Proceso actual del pimentón</h3>
                         <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
                             un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual. En el siguiente diagrama VSM se puede observar el proceso sin automatizar analizado
@@ -524,9 +527,9 @@
 
                     <!-- Aqui inicia la sección Proceso optimizado -->
                     <div class="container " id="optimizado">
-                        <h3 style="font-weight: bold;color: gold">Proceso optimizado</h3>
+                        <h3 style="font-weight: bold;color: teal">Proceso optimizado</h3>
                         <div class="row mb-3 "></div>
-                        <div class="col-12 text-center " data-aos="fade ">
+                        <div class="container" data-aos="fade ">
                             <p> A continuación se detallan aspectos claves de los procesos de producción manuales de cada uno de los productos seleccionados, se pueden ver las etapas del proceso y los resultados que se obtienen actualmente. También se plantea
                                 un proceso optimizado con el objetivo de apreciar las diferencias de una línea de producción optimizada y un proceso de producción manual. Para la propuesta de automatización se plantea implementar las siguientes etapas
                                 con el fin de mejorar la capacidad de producción del producto, y la calidad de este.</p>
@@ -735,32 +738,53 @@
                     </div>
 
                     <div class="row mb-3 "></div>
-                    <div class="col-12 text-center " data-aos="fade ">
-
+                    <div class="container" data-aos="fade ">
                         <p> Para el montaje se plantean dos cilindros, los cuales serán encargados de mover las cajas por las diferentes bandas traspostadoras dependiendo del calibre o clasificación del fruto. El proceso de selección se basa en la fuerza
                             requerida por los cilindros y el recorrido, el cual es de 1 metro. </p>
+                    </div>
 
-
-
+                    <div class="col-12 text-center " data-aos="fade ">
 
                         <img class="img-fluid " src="images/seleccioncilindros.png ">
-
+                    </div>
+                    <div class="container" data-aos="fade ">
                         <p>
                             Con los parámetros calculados para diametro mínimo del vastago y la carrera requerida por los cilindros se han seleccionado los actuadores CD85 N20-1000CK y CD85 N25-1000CKK. Estos cilindros se encargarán de mover las cajas a determinadas bandas trasportadoras
                             según el calibre del aguacate o pimentón. La activación de los cilindros se dará por la lectura de un sensor de color que hará el proceso de identificación al paso de las cajas.
-                        </p> <img class="img-fluid " src="images/cilindros.png " width="40%">
+                        </p>
+
+                        <div class="col-12 text-center " data-aos="fade ">
+                            <img class="img-fluid " src="images/cilindros.png " width="40%">
+
+                        </div>
                         </p>El siguiente elemento seleccionado es el compresor, para esta selección se parte del consumo total en condiciones noramles requerido por los cilindros, para este cálculo se han tenido en cuenta diversos factores como: perdidas
                         de consumo, simultaneidada y seguridad; se parte del volumen requerido por cada actuador y el número de cilos por minuto de operación.
                         </p>
+                    </div>
+                    <div class="col-12 text-center " data-aos="fade ">
                         <img class="img-fluid " src="images/compresor.png ">
+
+                    </div>
+                    <div class="container" data-aos="fade ">
                         <p>De los datos obtenidos se determina que el compresor adecuado es el NB5/5,5 FT/270 Nuair con una capacidad de 640 L/min de aspirado. En cuanto a las válvulas, los cilindros vástago simple de doble efecto requieren válvulas 5-2,
                             en este caso con solenoide y capacidad de 8.2 BAR con conector VV5Q11-06S-D . </p>
+
+                    </div>
+                    <div class="col-12 text-center " data-aos="fade ">
                         <img class="img-fluid " src="images/compreimg.PNG ">
+
+                    </div>
+                    <div class="container" data-aos="fade ">
                         <p>Por último se seleccionaron los sensores de color, el sensor ideal debe poder adaptarse al PLC además de tomar lecturas claras y confiables de los colores RGB, azul rojo y verde, ya que la lógica de activación de los cilindros
                             en Grafcet se basa en estas lecturas. Por ello se determinó que el sensor adecuado es el SI-COLO3</p>
+
+                    </div>
+                    <div class="col-12 text-center " data-aos="fade ">
                         <img class="img-fluid " src="images/color.jpg " width="40%">
                     </div>
+
                 </div>
+            </div>
             </div>
         </section>
         <!-- Aqui termina la sección actuadores -->
@@ -768,19 +792,24 @@
         <section class="site-section" id="eco">
             <div class="container ">
                 <div class="row mb-3 ">
-                    <div class="col-12 text-center " data-aos="fade ">
-                        <h2 class="section-title mb-3 ">Propuesta Económica</h2>
+                    <div class="container" data-aos="fade ">
+                        <div class="col-12 text-center " data-aos="fade ">
+                            <h2 class="section-title mb-3 ">Propuesta Económica</h2>
+                        </div>
+                        <p>Para la evaluación economica se hizo una investigación de los factores importantes que influirían en está, primero, una cotización de maquinaria, sensores, actuadores, y robots que debián ser usados. Luego a un nivel más de proceso,
+                            valores de compra de aguacate y pimenton sin procesar, y sus costos de transporte, por esa misma linea, el precio al que se puede vender la fruta, ya lavada encerada y empacada. y finalmente los gastos para realizar este proceso,
+                            incluyendo mano de obra, capital humano, recursos físicos, etc. Todo esto se realizo usando fuentes como el DANE, el ministerio de trabajo y empresas del sector que estubieron dispuestas a colaborarnos con los precios.</p>
+                        <div class="row mb-3 "></div>
+                        <div class="col-12 text-center " data-aos="fade ">
+                            <img class="img-fluid " src="images/Canvas.png ">
+                            <img class="img-fluid " src="images/imagen2.png ">
+                            <img class="img-fluid " src="images/imagen3.png ">
+                            <img class="img-fluid " src="images/imagen4.png ">
+                            <img class="img-fluid " src="images/imagen5.PNG ">
+                            <img class="img-fluid " src="images/imagen6.png ">
+                        </div>
                     </div>
 
-                    <div class="row mb-3 "></div>
-                    <div class="col-12 text-center " data-aos="fade ">
-                        <img class="img-fluid " src="images/Canvas.png ">
-                        <img class="img-fluid " src="images/imagen2.png ">
-                        <img class="img-fluid " src="images/imagen3.png ">
-                        <img class="img-fluid " src="images/imagen4.png ">
-                        <img class="img-fluid " src="images/imagen5.PNG ">
-                        <img class="img-fluid " src="images/imagen6.png ">
-                    </div>
                 </div>
             </div>
         </section>
@@ -897,24 +926,25 @@
 
         <!-- Aqui inicia  la sección industria 4.0 -->
         <section class="site-section " id="ind-section">
-            <div class="container ">
+            <div class="container " data-aos="fade">
 
                 <div class="row mb-3 ">
                     <div class="col-12 text-center " data-aos="fade ">
                         <h2 class="section-title mb-3 ">Industria 4.0</h2>
-                        <p>
-                            Como propuesta en cuantoa industria 4.0 se montó un servidor de google en la nube, en donde se tiene un servidor de ignition, en este servidor se realiza una interfaz humano maquina que muestra y permite interactuar con las variables del proyecto, que
-                            están hosteadas en 3 computadores diferentes, dependiendo el software que se necesitaba. </p>
-                        <p>
-                            Por un lado tenemos en la capa de control, una instancia local que conecta variables en el software Studio5000 a la nube, esto se hace a traves de ignition usando los estandares OPC DA, con este mismo tipo de conexión se tiene en el piso de sensores y
-                            actuadores, un gemelo digital de la celda robotizada ubicado en RobotStudio, y en este mismo piso pero usando los estandares de comunicación OPC UA, tenemos un gemelo digital del proceso desde que llega el material, hasta que
-                            se va a la celda robotizada empacado en cajas de acuerdo a su tamaño.
-                        </p>
-                        <div class="col-12 text-center" data-aos="fade"></div>
-
-                        <img class="img-fluid " src="images/ind4.jpg ">
                     </div>
+                    <p>
+                        Como propuesta en cuantoa industria 4.0 se montó un servidor de google en la nube, en donde se tiene un servidor de ignition, en este servidor se realiza una interfaz humano maquina que muestra y permite interactuar con las variables del proyecto, que
+                        están hosteadas en 3 computadores diferentes, dependiendo el software que se necesitaba. </p>
+                    <p>
+                        Por un lado tenemos en la capa de control, una instancia local que conecta variables en el software Studio5000 a la nube, esto se hace a traves de ignition usando los estandares OPC DA, con este mismo tipo de conexión se tiene en el piso de sensores y
+                        actuadores, un gemelo digital de la celda robotizada ubicado en RobotStudio, y en este mismo piso pero usando los estandares de comunicación OPC UA, tenemos un gemelo digital del proceso desde que llega el material, hasta que se
+                        va a la celda robotizada empacado en cajas de acuerdo a su tamaño.
+                    </p>
+                    <div class="col-12 text-center" data-aos="fade"></div>
+
+                    <img class="img-fluid " src="images/ind4.jpg ">
                 </div>
+            </div>
 
             </div>
 
@@ -922,29 +952,30 @@
         <!-- Aqui termina  la sección industria 4.0 -->
 
         <section class="site-section " id="gemelo-section">
-            <div class="container ">
+            <div class="container" data-aos="fade ">
 
                 <div class="row mb-3 ">
                     <div class="col-12 text-center " data-aos="fade ">
                         <h2 class="section-title mb-3 ">Gemelo Dígital</h2>
-                        <p>
-                            Para el gemelo digital, se implementa la primera sección de la planta (Lavado, Secado, Encerado y clasificación) en NX MCD, Se armo la planta usando modelos CAD de Maquinas reales, pero debido a los requerimientos tan altos para simularla, se realizo
-                            una version simplificada, con la que se pudieran manejar las mismas señales y se tubiera la misma geometría, pero que nos permitiera simular de manera adecuada el gemelo digital.
-                        </p>
-                        <div class="container" data-aos="fade-up" date-aos-delay="200">
-                            <div class="colim">
-                                <div class="card">
-                                    <div class="card-body" style="text-align:center;">
-                                        <h5 class="card-title">Video Simulación Gemelo Dígital</a>
-                                        </h5>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/MAQQLn1V5gM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        </div>
-                                </div>
+                    </div>
+                    <p>
+                        Para el gemelo digital, se implementa la primera sección de la planta (Lavado, Secado, Encerado y clasificación) en NX MCD, Se armo la planta usando modelos CAD de Maquinas reales, pero debido a los requerimientos tan altos para simularla, se realizo
+                        una version simplificada, con la que se pudieran manejar las mismas señales y se tubiera la misma geometría, pero que nos permitiera simular de manera adecuada el gemelo digital.
+                    </p>
+                    <div class="container" data-aos="fade-up" date-aos-delay="200">
+                        <div class="column">
+                            <div class="card">
+                                <div class="card-body" style="text-align:center;">
+                                    <h5 class="card-title">Video Simulación Gemelo Dígital</a>
+                                    </h5>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/QOKmKl7vrzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/MAQQLn1V5gM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                    </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
+            </div>
         </section>-->
 
 
@@ -979,6 +1010,107 @@
 
 
         </section>-->
+
+        <!-- Aqui inicia la sección  SCADA -->
+        <section class="site-section " id="scada-section">
+            <div class="container" data-aos="fade ">
+
+                <div class="row mb-3 ">
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <h2 class="section-title mb-3 ">SCADA</h2>
+                    </div>
+                    <h1>Conexión</h1>
+                    <p>Para la implementación del sistema SCADA se hizo uso de cloud computing, utilizando la plataforma de Google cloud, en la cual se creo un maquina virtual basada en Linux en donde se instaló el Gateway de Ignition, esto es gracias a
+                        que este software SCADA tiene soporte para diferentes sistemas operativos aun cuando los programas que estamos utilizando en la conexión están desarrollados para la plataforma Windows. Además de instalar un Gateway en la nube,
+                        se hizo necesario que cada integrante del grupo instalara su propio Gateway, esto para poder realizar una conexión exitosa entre todos al Gateway de la nube y así poder compartir datos de las diferentes simulaciones.</p>
+                    <p>Para el desarrollo del proyecto se utilizaron 3 software principales, Studio 5000 relacionado a la programación de PLC’s; SIEMENS NX, donde se construyó el gemelo digital y se aplicaron físicas y RobotStudio, en donde se implemento
+                        el gemelo digital y la programación de la celda robotizada para paletizado. Para conectar cada uno de estos softwares se utilizaron diferentes herramientas:</p>
+                    <ul>
+                        <li>Para Studio 5000 se utiliza RSlinx para establecer una comunicación OPC UA a Iginition, con el fin de compartir los diferentes tags utilizados en la lógica de programación para que puedan ser visualizados en la pantalla HMI, o
+                            implementados por otro software.</li>
+                        <li>Para Siemens NX se hizo uso de MCD para realizar una comunicación OPC DA, el cual permite compartir los valores de sensores y actuadores creados en el gemelo digital, con el fin de que estos puedan ser compartidos y visualizados,
+                            y ser controlados por un PLC.</li>
+                        <li>Para Robot Studio se utilizó ABB IRC5 OPC CONFIGURATION, para realizar una comunicación por protocolo OPC DA, aquí se pueden compartir diferentes variables del estado del proceso, y se pueden mandar acciones por el usuario para
+                            manejar la celda robotizada.</li>
+                    </ul>
+                    <p>Cada uno de estos softwares fue instalado en un computador diferente y en una ubicación diferente, teniendo SIEMENS NX (Juan Ramirez) y Robot Studio (Luis Zuluaga) en dos lugares distintos de Bogota Colombia, y por otro lado se tiene
+                        instalado Studio 5000 (Francisco Rodriguez ) en Portugal. Para que cada uno de estos equipos de computo se pudiese comunicar con el SCADA Ignition en la nube, fue necesario instalar módulos para el protocolo de comunicación MQTT,
+                        el cual se usaría para compartir las diferentes variables del proceso agregadas en el Gateway local de Ignition en cada caso, al Gateway compartido en la nube.</p>
+
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <img src="images/luisimg1.png" width="35%">
+                    </div>
+                    <p>Una vez establecidas los protocolos de comunicación, como se puede observar en la imagen, cada integrante podía acceder a todas las variables de todo el proceso tanto desde Ignition nube como desde su Ignition local, lo ultimo que
+                        se hizo fue establecer que variables mandaban en el proceso, y cuales deben ser leídas y modificadas, por ejemplo, los sensores creados en SIEMENS NX, deben ser captados por el PLC para luego ejecutar una acción sobre los actuadores
+                        relacionados, por ello es necesario vincular esta variables en el sentido correcto, es decir la señal de salida de un sensor en SIEMENS NX, debe sobreescribir la señal de entrada relacionada al sensor en Studio 5000, y por el contrario
+                        la señal de salida para accionar un actuador desde el PLC, debe reescribir la señal de entrada a SIEMENS NX para accionar el actuador relacionado.
+
+                    </p>
+                    <h1>Diseño interfaz HMI</h1>
+                    <p>
+                        Para el diseño de la pantalla HMI, se utilizó como guía el recurso de The High Performance HMI Handbook, el cual brinda algunas pautas para una buena implementación de interfaces humano- maquina. Siguiendo esto, a continuación, se muestran las diferentes
+                        pantallas creadas:
+                    </p>
+                    <ul>
+                        <li>
+                            <h3>1. Proceso</h3>
+                            <p>En esta ventana se puede ver un resumen general del estado de funcionamiento de las diferentes etapas del proceso, en la siguiente imagen se puede observar un pantallazo de como luce la interfaz, donde se puede observar que
+                                hay indicadores gráficos para cada etapa del proceso, acompañados de un indicador que puede cambiar de color entre rojo y verde, el cual indica si dicha maquina del proceso esta en funcionamiento o no; también se pueden
+                                observar los controles de mando para inicio y parada del proceso, y por ultimo se puede observar el conteo de cajas según su calibre, como salida global del proceso.</p>
+                            <div class="col-12 text-center " data-aos="fade ">
+                                <img src="images/sc1.png" width="90%">
+                            </div>
+                        </li>
+                        <li>
+                            <h3>2. Menú</h3>
+                            <p>
+                                De la misma imagen anterior se puede observar que en el borde derecho se encuentra un panel con 3 botones, el cual permite acceder a cualquiera de las tres pantallas con un click.
+                            </p>
+                        </li>
+                        <li>
+                            <h3>3. Panel superior</h3>
+                            <p>Este panel muestra información relacionada a la compañía, como su nombre y logo.</p>
+                        </li>
+                        <li>
+                            <h3>
+                                4. Actuadores
+                            </h3>
+                            <p>
+                                Ventana utilizada para visualizar mas en detalle esta etapa, en la que se encuentra el estado de funcionamiento de los cilindros, así como también la detección de sensores y estados de las bandas transportadoras integradas en esta etapa, por ultimo se
+                                pueden observar unos display de que muestra el conteo de cajas según sea el calibre clasificado.
+                            </p>
+                            <div class="col-12 text-center " data-aos="fade ">
+                                <img src="images/sc2.png" width="90%">
+                            </div>
+                        </li>
+                        <li>
+                            <h3>
+                                5. Paletizado
+                            </h3>
+                            </h3>
+                            <p>
+                                En el panel de paletizado se pueden supervisar toda la operación del manipulador, identificando cuando este se encuentra realizando una acción (operando), o cuando se encuentra sin realizar acciones (No operando), además es posible observar información
+                                en cuanto al gripper, de cuando este se abre o ce cierra; también se puede visualizar las rotaciones articulares de cada uno de los cuatro ejes del robot paletizador. Por otro lado, también se tiene información sobre la
+                                ubicación de los pallets, el estado de las bandas, y un contador para la construcción del pallet, el cual muestra el progreso y la cantidad de filas completadas.
+                            </p>
+                            <div class="col-12 text-center " data-aos="fade ">
+                                <img src="images/sc3.png" width="90%">
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="col-12 text-center " data-aos="fade ">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/3ee3a9lcoYY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </section>-->
+        <!-- Aqui termina  la sección SCADA -->
 
         <!-- Aqui inicia la sección proceso -->
         <section class="site-section testimonial-wrap " id="testimonials-section" data-aos="fade ">
